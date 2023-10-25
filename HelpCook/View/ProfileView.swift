@@ -19,11 +19,26 @@ struct ProfileView: View {
     @State private var profile = Profile(name: "sueunkim", userImage: Image(""), nickname: "수하")
     var body: some View {
         ZStack{
-            Color.red.ignoresSafeArea()
+            Color.white.ignoresSafeArea()
             VStack{
                 photoSelectView()
                 Text(profile.nickname)
                     .font(.title)
+                Spacer()
+                List {
+                    Label("문의하기", systemImage: "phone")
+                }
+                Button{
+                    
+                }label: {
+                    Text("저장하기")
+                        .foregroundStyle(.black)
+                        .background(
+                            RoundedRectangle(cornerRadius: 30)
+                                .frame(width: 200,height: 50)
+                                .foregroundStyle(.pink)
+                        )
+                }
                 Spacer()
             }
         }
@@ -32,7 +47,7 @@ struct ProfileView: View {
     func photoSelectView()-> some View{
         VStack{
             Button(action: {
-                           self.showingImagePicker.toggle()
+                self.showingImagePicker.toggle()
                 profile.userImage = pickedImage
             }, label: {
                 Circle()
