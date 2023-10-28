@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct Profile{
     let name: String
@@ -16,7 +17,9 @@ struct Profile{
 struct ProfileView: View {
     @State private var showingImagePicker = false
     @State var pickedImage: Image
-    @State private var profile = Profile(name: "sueunkim", userImage: Image(""), nickname: "수하")
+    @ObservedObject var imageViewModel: ImageViewModel
+    @State private var profile = Profile(name: "sueunkim", userImage: Image(systemName: "person"), nickname: "수하")
+
     var body: some View {
         ZStack{
             Color.white.ignoresSafeArea()
@@ -24,48 +27,61 @@ struct ProfileView: View {
                 photoSelectView()
                 Text(profile.nickname)
                     .font(.title)
-                Spacer()
-                List {
-                    Label("문의하기", systemImage: "phone")
+                ForEach(1..<5) { a in
+                    profileListView()
                 }
+                Spacer()
                 Button{
-                    
                 }label: {
-                    Text("저장하기")
-                        .foregroundStyle(.black)
+                    Text("Saved")
+                        .padding()
+                        .foregroundStyle(.white)
+                        .bold()
+                        .frame(maxWidth: 250)
                         .background(
-                            RoundedRectangle(cornerRadius: 30)
-                                .frame(width: 200,height: 50)
-                                .foregroundStyle(.pink)
+                            RoundedRectangle(cornerRadius: 10)
+                                .foregroundColor(.pink)
                         )
                 }
-                Spacer()
             }
         }
     }
     @ViewBuilder
+    func profileListView()-> some View{
+                HStack(alignment:.center){
+                    Label("Your Favorite", systemImage: "heart.fill")
+                        .padding()
+                        .frame(maxWidth:.infinity)
+                        .background(
+                            Rectangle()
+                            .stroke()
+                            .shadow(radius: 5)
+                            .foregroundStyle(
+                                LinearGradient(colors: [.red,.blue,.green], startPoint: .leading, endPoint: .trailing)
+                            )
+                        )
+                        .padding()
+                }
+    }
+    @ViewBuilder
     func photoSelectView()-> some View{
         VStack{
-            Button(action: {
+            Button{
                 self.showingImagePicker.toggle()
-                profile.userImage = pickedImage
-            }, label: {
+            }label: {
                 Circle()
-                    .stroke(
-                        Gradient(colors: [.red,.blue,.green])
-                    )
+                    .stroke( Gradient(colors: [.red,.blue,.green]) )
                     .background(
                         profile.userImage
                             .resizable()
-                            .frame(maxWidth: 200)
-                            .cornerRadius(100)
+                            .aspectRatio(contentMode: .fill)
+                            .clipShape(.circle)
                     )
                     .frame(maxWidth: 200)
                     .padding()
-            }).sheet(isPresented: $showingImagePicker) {
+            }.sheet(isPresented: $showingImagePicker) {
                 ImagePicker(sourceType: .photoLibrary) { (image) in
-                    self.pickedImage = Image(uiImage: image)
-                    print(image)
+                    profile.userImage = Image(uiImage: image)
                 }
             }
         }
@@ -73,5 +89,5 @@ struct ProfileView: View {
 }
 
 #Preview {
-    ProfileView(pickedImage: Image(""))
+    ProfileView(pickedImage: Image(systemName: "person.fill"), imageViewModel: ImageViewModel.init())
 }

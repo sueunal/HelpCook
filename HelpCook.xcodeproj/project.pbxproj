@@ -19,6 +19,7 @@
 		2C68BB622AE906B8000FD360 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68BB612AE906B8000FD360 /* ProfileView.swift */; };
 		2C68BB652AE90C02000FD360 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68BB642AE90C02000FD360 /* ImagePicker.swift */; };
 		2C68BB672AE91F8D000FD360 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C68BB662AE91F8D000FD360 /* Launch Screen.storyboard */; };
+		2CC2D2E42AEBEA520003AC93 /* ImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC2D2E32AEBEA520003AC93 /* ImageViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		2C68BB612AE906B8000FD360 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		2C68BB642AE90C02000FD360 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		2C68BB662AE91F8D000FD360 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		2CC2D2E32AEBEA520003AC93 /* ImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +149,7 @@
 				2C68BB5F2AE90652000FD360 /* ChatView.swift */,
 				2C68BB662AE91F8D000FD360 /* Launch Screen.storyboard */,
 				2C68BB612AE906B8000FD360 /* ProfileView.swift */,
+				2CC2D2E32AEBEA520003AC93 /* ImageViewModel.swift */,
 				2C68BB642AE90C02000FD360 /* ImagePicker.swift */,
 			);
 			path = View;
@@ -283,6 +286,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CC2D2E42AEBEA520003AC93 /* ImageViewModel.swift in Sources */,
 				2C68BB602AE90652000FD360 /* ChatView.swift in Sources */,
 				2C68BB352AE9044A000FD360 /* MainTabView.swift in Sources */,
 				2C68BB622AE906B8000FD360 /* ProfileView.swift in Sources */,
@@ -458,6 +462,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UIStatusBarStyle = "";
@@ -491,6 +496,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UIStatusBarStyle = "";
