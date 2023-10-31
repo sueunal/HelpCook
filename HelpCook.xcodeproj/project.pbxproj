@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C3300D52AEEAD0400E56B9C /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 2C3300D42AEEAD0400E56B9C /* SwiftSoup */; };
 		2C68BB332AE9044A000FD360 /* HelpCookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68BB322AE9044A000FD360 /* HelpCookApp.swift */; };
 		2C68BB352AE9044A000FD360 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68BB342AE9044A000FD360 /* MainTabView.swift */; };
 		2C68BB372AE9044B000FD360 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C68BB362AE9044B000FD360 /* Assets.xcassets */; };
@@ -19,7 +20,9 @@
 		2C68BB622AE906B8000FD360 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68BB612AE906B8000FD360 /* ProfileView.swift */; };
 		2C68BB652AE90C02000FD360 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68BB642AE90C02000FD360 /* ImagePicker.swift */; };
 		2C68BB672AE91F8D000FD360 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C68BB662AE91F8D000FD360 /* Launch Screen.storyboard */; };
+		2C909E652AEE47F000253954 /* CookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C909E642AEE47F000253954 /* CookView.swift */; };
 		2CC2D2E42AEBEA520003AC93 /* ImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC2D2E32AEBEA520003AC93 /* ImageViewModel.swift */; };
+		2CED54EE2AF0F43F006CF6F0 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED54ED2AF0F43F006CF6F0 /* Network.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +59,9 @@
 		2C68BB612AE906B8000FD360 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		2C68BB642AE90C02000FD360 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		2C68BB662AE91F8D000FD360 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		2C909E642AEE47F000253954 /* CookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookView.swift; sourceTree = "<group>"; };
 		2CC2D2E32AEBEA520003AC93 /* ImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewModel.swift; sourceTree = "<group>"; };
+		2CED54ED2AF0F43F006CF6F0 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C3300D52AEEAD0400E56B9C /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,6 +113,7 @@
 		2C68BB312AE9044A000FD360 /* HelpCook */ = {
 			isa = PBXGroup;
 			children = (
+				2CED54ED2AF0F43F006CF6F0 /* Network.swift */,
 				2C68BB322AE9044A000FD360 /* HelpCookApp.swift */,
 				2C68BB632AE9071E000FD360 /* View */,
 				2C68BB362AE9044B000FD360 /* Assets.xcassets */,
@@ -148,6 +155,7 @@
 				2C68BB5D2AE90589000FD360 /* HomeView.swift */,
 				2C68BB5F2AE90652000FD360 /* ChatView.swift */,
 				2C68BB662AE91F8D000FD360 /* Launch Screen.storyboard */,
+				2C909E642AEE47F000253954 /* CookView.swift */,
 				2C68BB612AE906B8000FD360 /* ProfileView.swift */,
 				2CC2D2E32AEBEA520003AC93 /* ImageViewModel.swift */,
 				2C68BB642AE90C02000FD360 /* ImagePicker.swift */,
@@ -171,6 +179,9 @@
 			dependencies = (
 			);
 			name = HelpCook;
+			packageProductDependencies = (
+				2C3300D42AEEAD0400E56B9C /* SwiftSoup */,
+			);
 			productName = HelpCook;
 			productReference = 2C68BB2F2AE9044A000FD360 /* HelpCook.app */;
 			productType = "com.apple.product-type.application";
@@ -243,6 +254,9 @@
 				Base,
 			);
 			mainGroup = 2C68BB262AE9044A000FD360;
+			packageReferences = (
+				2C3300D32AEEAD0400E56B9C /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+			);
 			productRefGroup = 2C68BB302AE9044A000FD360 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -286,10 +300,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C909E652AEE47F000253954 /* CookView.swift in Sources */,
 				2CC2D2E42AEBEA520003AC93 /* ImageViewModel.swift in Sources */,
 				2C68BB602AE90652000FD360 /* ChatView.swift in Sources */,
 				2C68BB352AE9044A000FD360 /* MainTabView.swift in Sources */,
 				2C68BB622AE906B8000FD360 /* ProfileView.swift in Sources */,
+				2CED54EE2AF0F43F006CF6F0 /* Network.swift in Sources */,
 				2C68BB652AE90C02000FD360 /* ImagePicker.swift in Sources */,
 				2C68BB5E2AE90589000FD360 /* HomeView.swift in Sources */,
 				2C68BB332AE9044A000FD360 /* HelpCookApp.swift in Sources */,
@@ -627,6 +643,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2C3300D32AEEAD0400E56B9C /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.6.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2C3300D42AEEAD0400E56B9C /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2C3300D32AEEAD0400E56B9C /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2C68BB272AE9044A000FD360 /* Project object */;
 }
