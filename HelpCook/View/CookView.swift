@@ -8,6 +8,8 @@
 import SwiftUI
 import SwiftSoup
 
+typealias cookModel = [cookItem]
+
 struct cookItem: Hashable, Identifiable{
     let id = UUID()
     var cookName: String
@@ -18,23 +20,30 @@ struct cookItem: Hashable, Identifiable{
 struct CookView: View {
     @State var cookLevel: String
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    var cookData: [cookItem]
     let rows = [GridItem(),GridItem()]
-    
+    var n: Int = 1
     var body: some View {
-        NavigationStack{
-            VStack{
-                ScrollView{
-                    cookListView()
+        ZStack{
+            Color("BackgroundColor")
+            NavigationStack{
+                VStack{
+                    ScrollView{
+                        LazyVGrid(columns: rows){
+                            ForEach(0..<20){ i in
+                                cookListView(pageNumber: 1)
+                            }
+                        }
+                    }
                 }
             }
+            .navigationTitle(cookLevel)
+            .navigationBarBackButtonHidden()
+            .navigationBarItems(leading: backButton())
         }
-        .navigationTitle(cookLevel)
-        .navigationBarBackButtonHidden()
-        .navigationBarItems(leading: backButton())
     }
-    func getCookData()->[cookItem]{
-        var pageNumber: Int = 2
-        let url = URL(string:"https://www.10000recipe.com/issue/view.html?cid=10kconveni&page=\(pageNumber)")
+    func getCookData(_ urlLink: String) -> [cookItem]{
+        let url = URL(string:urlLink)
         guard let myURL = url else {   return  []  }
         var recipes: [cookItem] = []
         do {
@@ -42,12 +51,12 @@ struct CookView: View {
             let doc: Document = try SwiftSoup.parse(html)
             let titleElements = try doc.select(".caption_tit")
             let imgElements = try doc.select(".thumbnail").select("a").select("img")
-            let imgDescription = try doc.select(".common_sp_caption_rv_name").select("a")
+            //            let imgDescription = try doc.select(".common_sp_caption_rv_name").select("a")
             // 값 출력 및 구조체에 저장
             for i in 0..<min(titleElements.count, imgElements.count) {
                 let titleText = try titleElements[i].text()
                 let imgSrc = try imgElements[i].attr("src") // img 태그의 src 속성 가져오기
-//                let imgDes = try imgDescription[i].text()
+                //                let imgDes = try imgDescription[i].text()
                 let recipe = cookItem(cookName: titleText, cookImage: imgSrc, cookDescription: "")
                 recipes.append(recipe)
             }
@@ -56,34 +65,29 @@ struct CookView: View {
         }
         return recipes
     }
-    
     @ViewBuilder
-    func cookListView()-> some View{
-        let cooks = getCookData()
-        
-        ForEach(cooks,id:\.self){ item in
-            LazyVGrid(columns: rows){
-                    AsyncImage(url: URL(string:item.cookImage)) { cookImage in
-                        cookImage
-                            .resizable()
-                            .frame(width: 160,height: 200)
-                            .aspectRatio(contentMode: .fit)
-                            .background()
-                    } placeholder: {
-                        ProgressView()
-                    }
-                VStack(alignment: .leading){
-                        Text(item.cookName)
-                        .padding(.bottom,10)
-                }
-            }.background(RoundedRectangle( cornerRadius: 10)
-                .stroke()
-                .bold()
-                .foregroundStyle(.green)
-                .shadow(radius: 5)
+    func cookListView(pageNumber: Int)-> some View{
+        let urlString: String =  "https://www.10000recipe.com/issue/view.html?cid=10kconveni&page=\(pageNumber)"
+        let cooks = getCookData(urlString)
+        Image(systemName: "bolt")
+            .resizable()
+            .frame(width: 180,height: 200)
+            .aspectRatio(contentMode: .fit)
+            .background(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke()
             )
-            .padding()
-        }
+//        ForEach(cooks, id: \.self) { item in
+//            if let url = URL(string: item.cookImage){
+//                cookItemData(itemImage: url , itemText: item.cookName)
+//            }
+//        }
+    }
+    @ViewBuilder
+    func cookItemData( itemImage: URL, itemText: String)->some View{
+        AsyncImage(url: itemImage)
+            .frame(width: 100,height: 100)
+            .background(Color.red)
     }
     @ViewBuilder
     func backButton()-> some View{
@@ -100,5 +104,5 @@ struct CookView: View {
 }
 
 #Preview {
-    CookView(cookLevel: "")
+    CookView(cookLevel: "", cookData: [])
 }

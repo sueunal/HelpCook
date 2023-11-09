@@ -10,7 +10,7 @@ import SwiftUI
 struct MainTabView: View {
     var body: some View {
         ZStack{
-            Color.red.ignoresSafeArea()
+            Color("BackgroundColor").ignoresSafeArea()
             VStack{
                 TabView {
                     HomeView()

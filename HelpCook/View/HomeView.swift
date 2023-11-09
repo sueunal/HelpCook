@@ -34,7 +34,7 @@ struct HomeView: View {
             ForEach(0..<4) { item in
                 VStack{
                     NavigationLink{
-                        CookView(cookLevel: cookLevel.cookLevelName)
+                        CookView(cookLevel: cookLevel.cookLevelName, cookData: [])
                     }label: {
                         cookLevelView(cookLevel: cookLevel)
                     }
