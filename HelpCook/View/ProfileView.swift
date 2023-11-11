@@ -33,7 +33,7 @@ struct ProfileView: View {
                 Spacer()
                 Button{
                 }label: {
-                    Text("Saved")
+                    Text("Save")
                         .padding()
                         .foregroundStyle(.white)
                         .bold()
@@ -43,6 +43,7 @@ struct ProfileView: View {
                                 .foregroundColor(.pink)
                         )
                 }
+                Spacer()
             }
         }
     }

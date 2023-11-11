@@ -8,81 +8,91 @@
 import SwiftUI
 
 struct CookLevel{
-//    enum CookLevel{
-//        case highLevel, middleLevel, lowLevel
-//        
-//        var level: String{
-//            switch self{
-//            case .highLevel:
-//                return "3"
-//            case .middleLevel:
-//                return "2"
-//            case .lowLevel:
-//                return "1"
-//            }
-//        }
-//    }
-    var cookLevelName: String
-    var cookLevel: String
+    enum CookLevelType{
+        case highLevel, middleLevel, lowLevel
+        var level: String{
+            switch self{
+            case .highLevel:
+                return "3"
+            case .middleLevel:
+                return "2"
+            case .lowLevel:
+                return "1"
+            }
+        }
+    }
+    enum CookRank{
+        case easy, soso, difficult
+        var CookRankName: String{
+            switch self{
+            case .easy:
+                return "간단한 요리"
+            case .soso:
+                return "적당한 요리"
+            case .difficult:
+                return "어려운 요리"
+            }
+        }
+    }
+    var cookLevelName: CookRank
+    var cookLevel: CookLevelType
     var cookDescription: String
 }
+
 struct HomeView: View {
-        @State var cookLevel = CookLevel(cookLevelName:  "간단한 요리", cookLevel: "1", cookDescription: "누구나 쉽게 요리할 수 있어요")
+    @State var cookLevel = CookLevel(cookLevelName: .difficult, cookLevel: .lowLevel, cookDescription: "누구나 쉽게 요리할 수 있어요")
     var path = Path()
     var body: some View {
         NavigationStack {
-            ForEach(0..<4) { item in
+            ZStack{
+                Color("BackgroundColor")
                 VStack{
-                    NavigationLink{
-                        CookView(cookLevel: cookLevel.cookLevelName, cookData: [])
-                    }label: {
-                        cookLevelView(cookLevel: cookLevel)
+                    ScrollView{
+                        NavigationLink{
+                            CookView(cookLevel: cookLevel.cookLevelName.CookRankName, levelType: cookLevel.cookLevel.level, cookData: [])
+                        }label: {
+                            cookStepView(cookLevel: cookLevel, cookLevelName: cookLevel.cookLevelName.CookRankName)
+                        }
                     }
                 }
             }
         }
     }
     @ViewBuilder
-    func cookLevelView(cookLevel: CookLevel)-> some View{
-        GeometryReader{ _ in
-            ZStack{
-                RoundedRectangle(cornerRadius: 10)
-                    .foregroundStyle(.white)
-                    .frame(maxWidth: .infinity,maxHeight: 150)
-                    .shadow(radius: 5)
-                    .padding()
+    func cookStepView(cookLevel: CookLevel, cookLevelName: String)-> some View{
                 VStack(alignment: .leading){
                     HStack{
-                        Text(cookLevel.cookLevel)
+                        Text(cookLevel.cookLevel.level)
                             .foregroundStyle(.green)
                             .fontWeight(.heavy)
-                            .bold()
                             .padding(7)
                             .overlay {
                                 Circle()
                                     .stroke()
                                     .foregroundStyle(.green)
                             }
-                            .padding(.leading,30)
+                            .padding(.leading,10)
                     }
                     HStack{
                         Spacer()
-                        Text(cookLevel.cookLevelName)
+                        Text(cookLevelName)
                             .foregroundStyle(.green)
                             .font(.system(size: 30))
                             .fontWeight(.heavy)
                             .bold()
-                            .padding(.trailing,20)
+                            .padding(.trailing,10)
                     }.padding(10)
                     HStack{
                         Text(cookLevel.cookDescription)
                             .foregroundStyle(.black)
                             .fontWeight(.thin)
-                            .padding(.leading,30)
+                            .padding()
                     }
-                }
-            }
-        }
+                }.background(
+                     RoundedRectangle(cornerRadius: 10)
+                        .foregroundStyle(.white)
+                        .frame(maxWidth:.infinity, maxHeight: 150)
+                ).padding()
     }
 }
 
