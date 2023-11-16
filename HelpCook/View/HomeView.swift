@@ -7,39 +7,8 @@
 
 import SwiftUI
 
-struct CookLevel{
-    enum CookLevelType{
-        case highLevel, middleLevel, lowLevel
-        var level: String{
-            switch self{
-            case .highLevel:
-                return "3"
-            case .middleLevel:
-                return "2"
-            case .lowLevel:
-                return "1"
-            }
-        }
-    }
-    enum CookRank{
-        case easy, soso, difficult
-        var CookRankName: String{
-            switch self{
-            case .easy:
-                return "간단한 요리"
-            case .soso:
-                return "적당한 요리"
-            case .difficult:
-                return "어려운 요리"
-            }
-        }
-    }
-    var cookLevelName: CookRank
-    var cookLevel: CookLevelType
-    var cookDescription: String
-}
-
 struct HomeView: View {
+    @ObservedObject var cookmodel = CookViewModel()
     @State var cookLevel = CookLevel(cookLevelName: .difficult, cookLevel: .lowLevel, cookDescription: "누구나 쉽게 요리할 수 있어요")
     var path = Path()
     var body: some View {
@@ -49,9 +18,12 @@ struct HomeView: View {
                 VStack{
                     ScrollView{
                         NavigationLink{
-                            CookView(cookLevel: cookLevel.cookLevelName.CookRankName, levelType: cookLevel.cookLevel.level, cookData: [])
+                            CookView(cookLevel: cookLevel.cookLevelName.CookRankName, levelType: cookLevel.cookLevel.level)
                         }label: {
                             cookStepView(cookLevel: cookLevel, cookLevelName: cookLevel.cookLevelName.CookRankName)
+                        }
+                        .onTapGesture {
+                            cookmodel.getRequestData()
                         }
                     }
                 }

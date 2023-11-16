@@ -22,7 +22,9 @@
 		2C68BB672AE91F8D000FD360 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C68BB662AE91F8D000FD360 /* Launch Screen.storyboard */; };
 		2C909E652AEE47F000253954 /* CookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C909E642AEE47F000253954 /* CookView.swift */; };
 		2CC2D2E42AEBEA520003AC93 /* ImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC2D2E32AEBEA520003AC93 /* ImageViewModel.swift */; };
-		2CED54EE2AF0F43F006CF6F0 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED54ED2AF0F43F006CF6F0 /* Network.swift */; };
+		2CED54EE2AF0F43F006CF6F0 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED54ED2AF0F43F006CF6F0 /* NetworkManager.swift */; };
+		2CF6EBE82B05E8A000C956DA /* CookItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF6EBE72B05E8A000C956DA /* CookItem.swift */; };
+		2CF6EBEB2B05EC0800C956DA /* CookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF6EBEA2B05EC0800C956DA /* CookViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,7 +63,9 @@
 		2C68BB662AE91F8D000FD360 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		2C909E642AEE47F000253954 /* CookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookView.swift; sourceTree = "<group>"; };
 		2CC2D2E32AEBEA520003AC93 /* ImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewModel.swift; sourceTree = "<group>"; };
-		2CED54ED2AF0F43F006CF6F0 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		2CED54ED2AF0F43F006CF6F0 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		2CF6EBE72B05E8A000C956DA /* CookItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookItem.swift; sourceTree = "<group>"; };
+		2CF6EBEA2B05EC0800C956DA /* CookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,8 +117,10 @@
 		2C68BB312AE9044A000FD360 /* HelpCook */ = {
 			isa = PBXGroup;
 			children = (
-				2CED54ED2AF0F43F006CF6F0 /* Network.swift */,
 				2C68BB322AE9044A000FD360 /* HelpCookApp.swift */,
+				2CED54ED2AF0F43F006CF6F0 /* NetworkManager.swift */,
+				2CF6EBE92B05E92600C956DA /* Model */,
+				2CF6EBEC2B05F59700C956DA /* ViewModel */,
 				2C68BB632AE9071E000FD360 /* View */,
 				2C68BB362AE9044B000FD360 /* Assets.xcassets */,
 				2C68BB3B2AE9044B000FD360 /* HelpCook.entitlements */,
@@ -151,16 +157,32 @@
 		2C68BB632AE9071E000FD360 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2C68BB662AE91F8D000FD360 /* Launch Screen.storyboard */,
 				2C68BB342AE9044A000FD360 /* MainTabView.swift */,
 				2C68BB5D2AE90589000FD360 /* HomeView.swift */,
 				2C68BB5F2AE90652000FD360 /* ChatView.swift */,
-				2C68BB662AE91F8D000FD360 /* Launch Screen.storyboard */,
 				2C909E642AEE47F000253954 /* CookView.swift */,
 				2C68BB612AE906B8000FD360 /* ProfileView.swift */,
-				2CC2D2E32AEBEA520003AC93 /* ImageViewModel.swift */,
-				2C68BB642AE90C02000FD360 /* ImagePicker.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		2CF6EBE92B05E92600C956DA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2C68BB642AE90C02000FD360 /* ImagePicker.swift */,
+				2CF6EBE72B05E8A000C956DA /* CookItem.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2CF6EBEC2B05F59700C956DA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2CF6EBEA2B05EC0800C956DA /* CookViewModel.swift */,
+				2CC2D2E32AEBEA520003AC93 /* ImageViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,11 +323,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C909E652AEE47F000253954 /* CookView.swift in Sources */,
+				2CF6EBEB2B05EC0800C956DA /* CookViewModel.swift in Sources */,
 				2CC2D2E42AEBEA520003AC93 /* ImageViewModel.swift in Sources */,
 				2C68BB602AE90652000FD360 /* ChatView.swift in Sources */,
 				2C68BB352AE9044A000FD360 /* MainTabView.swift in Sources */,
 				2C68BB622AE906B8000FD360 /* ProfileView.swift in Sources */,
-				2CED54EE2AF0F43F006CF6F0 /* Network.swift in Sources */,
+				2CED54EE2AF0F43F006CF6F0 /* NetworkManager.swift in Sources */,
+				2CF6EBE82B05E8A000C956DA /* CookItem.swift in Sources */,
 				2C68BB652AE90C02000FD360 /* ImagePicker.swift in Sources */,
 				2C68BB5E2AE90589000FD360 /* HomeView.swift in Sources */,
 				2C68BB332AE9044A000FD360 /* HelpCookApp.swift in Sources */,
