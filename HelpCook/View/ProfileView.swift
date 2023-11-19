@@ -9,8 +9,9 @@ import SwiftUI
 import Foundation
 
 struct Profile{
-    let name: String
-    var userImage: Image
+    var name: String
+    var userImage: UIImage?
+    var message: String
     var nickname: String
 }
 
@@ -18,20 +19,24 @@ struct ProfileView: View {
     @State private var showingImagePicker = false
     @State var pickedImage: Image
     @ObservedObject var imageViewModel: ImageViewModel
-    @State private var profile = Profile(name: "sueunkim", userImage: Image(systemName: "person"), nickname: "수하")
-
+    @State private var profile = Profile(name: "김수은", userImage: UIImage(systemName: "person"), message:"", nickname: "수하")
+    @State var ProfileImage: Image = Image(systemName: "person")
+    @State var isSaved: Bool = false
     var body: some View {
         ZStack{
-            Color.white.ignoresSafeArea()
             VStack{
                 photoSelectView()
                 Text(profile.nickname)
                     .font(.title)
-                ForEach(1..<5) { a in
-                    profileListView()
-                }
+                List {
+                    TextField("input", text: $profile.message)
+                }.listStyle(.inset)
                 Spacer()
                 Button{
+                    if let image = imageViewModel.pickedImage{
+                        profile.userImage = image
+                        isSaved.toggle()
+                    }
                 }label: {
                     Text("Save")
                         .padding()
@@ -43,9 +48,18 @@ struct ProfileView: View {
                                 .foregroundColor(.pink)
                         )
                 }
+                .alert(isPresented: $isSaved, content: {
+                    Alert(title: Text("저장되었습니다."))
+                })
                 Spacer()
             }
+            .onAppear{
+                if let image = imageViewModel.pickedImage{
+                    ProfileImage = Image(uiImage: image)
+                }
+            }
         }
+        
     }
     @ViewBuilder
     func profileListView()-> some View{
@@ -69,20 +83,26 @@ struct ProfileView: View {
         VStack{
             Button{
                 self.showingImagePicker.toggle()
+                guard let myImage = profile.userImage else{
+                    return
+                }
+                ProfileImage = Image(uiImage: myImage)
             }label: {
                 Circle()
                     .stroke( Gradient(colors: [.red,.blue,.green]) )
                     .background(
-                        profile.userImage
+                        ProfileImage
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .clipShape(.circle)
+                            .frame(maxWidth: 200, maxHeight: 200)
+                            .cornerRadius(100)
                     )
-                    .frame(maxWidth: 200)
+                    .frame(maxWidth: 200, maxHeight: 200)
                     .padding()
             }.sheet(isPresented: $showingImagePicker) {
                 ImagePicker(sourceType: .photoLibrary) { (image) in
-                    profile.userImage = Image(uiImage: image)
+                    ProfileImage = Image(uiImage: image)
+                    imageViewModel.pickedImage = image
                 }
             }
         }
