@@ -26,7 +26,7 @@ struct MainTabView: View {
                             Label("Profile", systemImage: "person.circle")
                         }
                 }
-            }
+            }.navigationBarBackButtonHidden(true)
         }
     }
 }

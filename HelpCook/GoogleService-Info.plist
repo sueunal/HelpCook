@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyBW7A7xP8s_qryn5hU9L8c9Z5AoFHUhHkU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>751721702480</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.sueunkim.HelpCook</string>
+	<key>PROJECT_ID</key>
+	<string>cooktook-6b52d</string>
+	<key>STORAGE_BUCKET</key>
+	<string>cooktook-6b52d.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:751721702480:ios:5d1ebe60db8bb78d299d55</string>
+</dict>
+</plist>
