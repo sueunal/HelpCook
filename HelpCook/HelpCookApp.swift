@@ -22,7 +22,7 @@ struct HelpCookApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView{
-                MainTabView()
+                RegisterView()
             }
         }
     }

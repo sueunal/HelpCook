@@ -13,8 +13,6 @@ class ImageViewModel: ObservableObject {
         didSet {
             if let imageData = pickedImage?.pngData() {
                 UserDefaults.standard.set(imageData, forKey: "pickedImage")
-            } else {
-                UserDefaults.standard.removeObject(forKey: "pickedImage")
             }
         }
     }

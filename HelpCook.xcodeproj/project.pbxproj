@@ -183,13 +183,12 @@
 		2C68BB632AE9071E000FD360 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2CF514202B0B83A4004EAFA6 /* Login */,
 				2C68BB662AE91F8D000FD360 /* Launch Screen.storyboard */,
 				2C68BB342AE9044A000FD360 /* MainTabView.swift */,
 				2C68BB5D2AE90589000FD360 /* HomeView.swift */,
 				2C68BB5F2AE90652000FD360 /* ChatView.swift */,
-				2C78C92E2B09E8B80050AE46 /* RegisterView.swift */,
 				2C78C9302B0A46F70050AE46 /* InputFieldView.swift */,
-				2CF5141E2B0B387D004EAFA6 /* loginView.swift */,
 				2C78C9442B0A52310050AE46 /* SecureInputView.swift */,
 				2C909E642AEE47F000253954 /* CookView.swift */,
 				2C68BB612AE906B8000FD360 /* ProfileView.swift */,
@@ -202,6 +201,15 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2CF514202B0B83A4004EAFA6 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				2C78C92E2B09E8B80050AE46 /* RegisterView.swift */,
+				2CF5141E2B0B387D004EAFA6 /* loginView.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		2CF6EBE92B05E92600C956DA /* Model */ = {
