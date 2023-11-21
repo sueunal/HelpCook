@@ -22,4 +22,8 @@ class ImageViewModel: ObservableObject {
             pickedImage = UIImage(data: imageData)
         }
     }
+    func removePickedImage(){
+        UserDefaults.standard.removeObject(forKey: "pickedImage")
+        self.pickedImage = nil
+    }
 }

@@ -18,9 +18,9 @@ struct Profile{
 struct ProfileView: View {
     @State private var showingImagePicker = false
     @State var pickedImage: Image
-    @ObservedObject var imageViewModel: ImageViewModel
+    @ObservedObject var imageViewModel = ImageViewModel()
     @State private var profile = Profile(name: "김수은", userImage: UIImage(systemName: "person"), message:"", nickname: "수하")
-    @State var ProfileImage: Image = Image(systemName: "person")
+    @State var ProfileImage: UIImage? = UIImage(systemName: "person")
     @State var isSaved: Bool = false
     @State var isClick: Bool = false
     @State var deleteImage: Bool = false
@@ -31,9 +31,8 @@ struct ProfileView: View {
                 Text(profile.nickname)
                     .font(.title)
                 resetPhotoButton()
-                List {
-                    TextField("input", text: $profile.message)
-                }.listStyle(.inset)
+                profileListView()
+                profileListView()
                 Spacer()
                 Button{
                     if let image = imageViewModel.pickedImage{
@@ -58,7 +57,7 @@ struct ProfileView: View {
             }
             .onAppear{
                 if let image = imageViewModel.pickedImage{
-                    ProfileImage = Image(uiImage: image)
+                    ProfileImage = image
                 }
             }
         }
@@ -84,12 +83,9 @@ struct ProfileView: View {
     @ViewBuilder
     func resetPhotoButton()-> some View{
         Button{
-            isClick.toggle()
+            isClick = true
             if deleteImage{
-                imageViewModel.pickedImage = UIImage(systemName: "person")
-                if let image = imageViewModel.pickedImage{
-                    ProfileImage = Image(uiImage: image)
-                }
+                imageViewModel.removePickedImage()
             }
         }label: {
             Image(systemName: "trash")
@@ -120,27 +116,24 @@ struct ProfileView: View {
         VStack{
             Button{
                 self.showingImagePicker.toggle()
-                guard let myImage = profile.userImage else{
-                    return
+                if let myImage = profile.userImage {
+                    ProfileImage = myImage
                 }
-                ProfileImage = Image(uiImage: myImage)
             }label: {
                 Circle()
                     .stroke( Gradient(colors: [.red,.blue,.green]) )
                     .background(
-                        ProfileImage
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(maxWidth: 200, maxHeight: 200)
-                            .frame(minWidth: 100,minHeight: 100)
-                            .cornerRadius(100)
+//                        ProfileImage
+//                            .frame(maxWidth: 200, maxHeight: 200)
+//                            .frame(minWidth: 100,minHeight: 100)
+//                            .cornerRadius(100)
                     )
                     .frame(maxWidth: 200, maxHeight: 200)
                     .frame(minWidth: 100,minHeight: 100)
                     .padding()
             }.sheet(isPresented: $showingImagePicker) {
-                ImagePicker(sourceType: .photoLibrary) { (image) in
-                    ProfileImage = Image(uiImage: image)
+                ImagePicker(sourceType: .photoLibrary) { image in
+                    ProfileImage = image
                     imageViewModel.pickedImage = image
                 }
             }
