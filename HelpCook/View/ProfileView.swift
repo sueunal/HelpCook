@@ -20,7 +20,6 @@ struct ProfileView: View {
     @State var pickedImage: Image
     @ObservedObject var imageViewModel = ImageViewModel()
     @State private var profile = Profile(name: "김수은", userImage: UIImage(systemName: "person"), message:"", nickname: "수하")
-    @State var ProfileImage: UIImage? = UIImage(systemName: "person")
     @State var isSaved: Bool = false
     @State var isClick: Bool = false
     @State var deleteImage: Bool = false
@@ -34,34 +33,12 @@ struct ProfileView: View {
                 profileListView()
                 profileListView()
                 Spacer()
-                Button{
-                    if let image = imageViewModel.pickedImage{
-                        profile.userImage = image
-                        isSaved.toggle()
-                    }
-                }label: {
-                    Text("Save")
-                        .padding()
-                        .foregroundStyle(.white)
-                        .bold()
-                        .frame(maxWidth: 250)
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .foregroundColor(.pink)
-                        )
-                }
-                .alert(isPresented: $isSaved, content: {
-                    Alert(title: Text("저장되었습니다."))
-                })
+                saveButton()
                 Spacer()
             }
-            .onAppear{
-                if let image = imageViewModel.pickedImage{
-                    ProfileImage = image
-                }
-            }
         }
-        
+        .onAppear{
+        }
     }
     @ViewBuilder
     func profileListView()-> some View{
@@ -83,10 +60,7 @@ struct ProfileView: View {
     @ViewBuilder
     func resetPhotoButton()-> some View{
         Button{
-            isClick = true
-            if deleteImage{
-                imageViewModel.removePickedImage()
-            }
+            isClick.toggle()
         }label: {
             Image(systemName: "trash")
                 .resizable()
@@ -99,14 +73,11 @@ struct ProfileView: View {
                 primaryButton: .default(
                     Text("취소"),
                     action: .some({
-                        deleteImage = false
                     })
                 ),
                 secondaryButton: .destructive(
                     Text("지우기"),
-                    action: .some({
-                        deleteImage = true
-                    })
+                    action: imageViewModel.removePickedImage
                 )
             )
         })
@@ -115,29 +86,51 @@ struct ProfileView: View {
     func photoSelectView()-> some View{
         VStack{
             Button{
-                self.showingImagePicker.toggle()
-                if let myImage = profile.userImage {
-                    ProfileImage = myImage
-                }
+                showingImagePicker.toggle()
+//                ProfileImage = imageViewModel.popPickedImage()
             }label: {
                 Circle()
-                    .stroke( Gradient(colors: [.red,.blue,.green]) )
+                    .stroke(Gradient(colors: [.red,.blue,.green]))
                     .background(
-//                        ProfileImage
-//                            .frame(maxWidth: 200, maxHeight: 200)
-//                            .frame(minWidth: 100,minHeight: 100)
-//                            .cornerRadius(100)
+                        imageViewModel.pickedImage
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(maxWidth: 200, maxHeight: 200)
+                            .frame(minWidth: 100,minHeight: 100)
+                            .cornerRadius(100)
                     )
                     .frame(maxWidth: 200, maxHeight: 200)
                     .frame(minWidth: 100,minHeight: 100)
                     .padding()
             }.sheet(isPresented: $showingImagePicker) {
                 ImagePicker(sourceType: .photoLibrary) { image in
-                    ProfileImage = image
-                    imageViewModel.pickedImage = image
+                    imageViewModel.pushPickedImage(pushImage: image, savedName: "pickedImage")
+                    imageViewModel.savePickedImage()
                 }
             }
         }
+    }
+    @ViewBuilder
+    func saveButton()-> some View{
+        Button{
+            isSaved.toggle()
+            if isSaved{
+                imageViewModel.savePickedImage()
+            }
+        }label: {
+            Text("Save")
+                .padding()
+                .foregroundStyle(.white)
+                .bold()
+                .frame(maxWidth: 250)
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .foregroundColor(.pink)
+                )
+        }
+        .alert(isPresented: $isSaved, content: {
+            Alert(title: Text("저장되었습니다."))
+        })
     }
 }
 
