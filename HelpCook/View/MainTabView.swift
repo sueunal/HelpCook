@@ -21,7 +21,7 @@ struct MainTabView: View {
                         .tabItem {
                             Label("Chat", systemImage: "message")
                         }
-                    ProfileView(pickedImage: Image(""), imageViewModel: ImageViewModel.init())
+                    ProfileView()
                         .tabItem {
                             Label("Profile", systemImage: "person.circle")
                         }

@@ -14,12 +14,15 @@ struct loginView: View {
     @ObservedObject var authViewModel = AuthViewModel()
     var body: some View {
             VStack{
-                Text("LOGIN")
-                    .font(.system(size: 50))
-                    .italic()
-                InputFieldView(inputString: $email, inputMessage: "이메일을 입력해주세요")
-                SecureInputView(secureMessage: "비밀번호를 입력해주세요", password: $passwd)
+                Spacer()
+                Text("로그인")
+                    .font(.system(size: 40))
+                    .fontWeight(.heavy)
+                Spacer()
+                InputView(text: $email, placeholder: "Enter Email@Email.com", title:"Email" )
+                InputView(text: $passwd, placeholder: "Enter Password", title: "Password", isSecureField: true)
                 loginButton()
+                Spacer()
             }
             .navigationBarBackButtonHidden(true)
             .navigationDestination(isPresented: $isLogin) {

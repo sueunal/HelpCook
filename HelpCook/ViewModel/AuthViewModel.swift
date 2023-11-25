@@ -27,7 +27,6 @@ enum AuthError: Error{
             return "이메일이 입력되지 않았습니다."
         }
     }
-    
 }
 class AuthViewModel: ObservableObject {
     @Published var isLogin: Bool = false
@@ -37,8 +36,7 @@ class AuthViewModel: ObservableObject {
     init() {
         
     }
-    func errorHandling(){
-    }
+    
     func registerUser(email: String, password: String){
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if let error = error?.localizedDescription{
