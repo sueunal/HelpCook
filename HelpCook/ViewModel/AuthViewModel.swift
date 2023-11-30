@@ -32,6 +32,7 @@ class AuthViewModel: ObservableObject {
     @Published var isLogin: Bool = false
     @Published var isRegistered: Bool = false
     @Published var errorMessage: String = ""
+    @Published var isLoggin: Bool = false
     
     init() {
         

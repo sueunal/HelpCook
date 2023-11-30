@@ -25,8 +25,10 @@ struct RegisterView: View {
                 InputView(text: $emailAddress, placeholder:"Enter Email@address.com" , title: "Email")
                 InputView(text: $passwd, placeholder: "Enter Password", title: "Password", isSecureField: true)
                 registerButton()
-                    .padding()
-                Spacer()
+                    .alert(isPresented: $isError, content: {
+                        Alert(title:Text("Error") ,
+                              message: Text(authViewModel.errorMessage))
+                    })
             }
             .padding(.horizontal)
             .navigationDestination(isPresented: $isRegistered){
@@ -41,7 +43,7 @@ struct RegisterView: View {
             if authViewModel.isRegistered{
                 isRegistered.toggle()
             }else{
-                isError.toggle()
+                isError = true
             }
         }label: {
             Text("회원가입")
@@ -55,9 +57,7 @@ struct RegisterView: View {
                         .foregroundStyle(.black)
                         .frame(maxWidth: 200)
                 )
-        }.alert(isPresented: $isError, content: {
-            Alert(title: Text(authViewModel.errorMessage))
-        })
+        }
     }
 }
 
