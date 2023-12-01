@@ -14,16 +14,21 @@ struct ProfileView: View {
     
     var body: some View {
         VStack{
-            PhotosPicker(
-                selection: $selectedItem,
-                matching: .images
-            ){
-                if imageViewModel.isDownload{
-                   loadedView()
-                }else{
-                    photoSelectView()
+            HStack(spacing: 20){
+                PhotosPicker(
+                    selection: $selectedItem,
+                    matching: .images
+                ){
+                    if imageViewModel.isDownload{
+                        loadedView()
+                    }else{
+                        photoSelectView()
+                    }
                 }
+                .padding()
+                InfoView()
             }
+            Spacer()
             .onChange(of: selectedItem) { newItem in
                 Task {
                     if let data = try? await newItem?.loadTransferable(type: Data.self) {
@@ -33,26 +38,8 @@ struct ProfileView: View {
                 }
             }
         }.onAppear{
-            imageViewModel.imageDonwload()
+//            imageViewModel.imageDonwload()
         }
-    }
-    @ViewBuilder
-    func loadedView()-> some View{
-        imageViewModel.profileImage
-            .resizable()
-            .frame(width: 150, height: 150)
-            .clipShape(Circle())
-            .aspectRatio(contentMode: .fill)
-            .frame(width: 150, height: 150)
-            .background {
-                Circle().fill(
-                    LinearGradient(
-                        colors: [.yellow, .orange],
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                )
-            }
     }
     @ViewBuilder
     func photoSelectView()-> some View{
@@ -76,6 +63,7 @@ struct ProfileView: View {
             Image(systemName: "person.fill")
                 .resizable()
                 .frame(width: 80, height: 80)
+                .foregroundStyle(.black)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 150, height: 150)
@@ -83,13 +71,22 @@ struct ProfileView: View {
                 .background {
                     Circle().fill(
                         LinearGradient(
-                            colors: [.yellow, .orange],
-                            startPoint: .top,
-                            endPoint: .bottom
+                            colors: [.cyan, .white],
+                            startPoint: .center,
+                            endPoint: .zero
                         )
                     )
                 }
         }
+    }
+    @ViewBuilder
+    func loadedView()-> some View{
+        imageViewModel.profileImage
+            .resizable()
+            .frame(width: 150, height: 150)
+            .clipShape(Circle())
+            .aspectRatio(contentMode: .fill)
+            .frame(width: 150, height: 150)
     }
 }
                    
