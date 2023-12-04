@@ -8,35 +8,32 @@
 import SwiftUI
 
 struct MainTabView: View {
-    
-    @State private var isLogged: Bool = true
+    @ObservedObject var viewModel = AuthViewModel()
+    @State var showMainTabView: Bool = false
     var body: some View {
-        ZStack{
-            Color("BackgroundColor").ignoresSafeArea()
-            if isLogged{
-                VStack{
-                    TabView {
-                        HomeView()
-                            .tabItem {
-                                Label("Home", systemImage: "house.fill")
-                            }
-                        ChatView()
-                            .tabItem {
-                                Label("Chat", systemImage: "message")
-                            }
-                        ProfileView()
-                            .tabItem {
-                                Label("Profile", systemImage: "person.circle")
-                            }
+        NavigationStack(root: {
+            ZStack{
+                Color("BackgroundColor").ignoresSafeArea()
+                    VStack{
+                        TabView {
+                            HomeView()
+                                .tabItem {
+                                    Label("Home", systemImage: "house.fill")
+                                }
+                            ChatView()
+                                .tabItem {
+                                    Label("Chat", systemImage: "message")
+                                }
+                            ProfileView()
+                                .tabItem {
+                                    Label("Profile", systemImage: "person.circle")
+                                }
+                        }
                     }
-                }.navigationBarBackButtonHidden(true)
-            }else{
-                RegisterView()
             }
-        }
+        })
     }
 }
-
 #Preview {
     MainTabView()
 }

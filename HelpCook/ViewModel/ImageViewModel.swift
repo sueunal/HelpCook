@@ -25,6 +25,7 @@ class ImageViewModel: ObservableObject{
         
         let uploadTask = riversRef.putData(data, metadata: storageMeta) { (metadata, error) in
             guard let metadata = metadata else {
+                print(metadata)
                 return
             }
             riversRef.downloadURL { (url, error) in
@@ -39,15 +40,20 @@ class ImageViewModel: ObservableObject{
         let storageRef = storage.reference()
         let islandRef = storageRef.child("UserProfile/Images/rivers.jpg")
         
-        islandRef.getData(maxSize: 1 * 4048 * 4048 ){data, error in
-            if let error = error {
-                self.isDownload = false
-                print(error)
-            } else {
-                if let donwloadImage = UIImage(data: data!){
-                    self.profileImage = Image(uiImage: donwloadImage)
-                    self.isDownload = true
-                    print("Success!")
+        if self.profileImage != Image(systemName: "person.fill"){
+            print("not Empty")
+        }
+        else{
+            islandRef.getData(maxSize: 4048 * 4048 ){data, error in
+                if let error = error {
+                    self.isDownload = false
+                    print(error)
+                } else {
+                    if let donwloadImage = UIImage(data: data!){
+                        self.profileImage = Image(uiImage: donwloadImage)
+                        self.isDownload = true
+                        print("Success!")
+                    }
                 }
             }
         }

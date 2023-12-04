@@ -21,7 +21,7 @@ struct RegisterView: View {
                 Text("회원가입")
                     .font(.system(size: 40))
                     .fontWeight(.heavy)
-                Spacer()
+                Spacer().frame(height: 100)
                 InputView(text: $emailAddress, placeholder:"Enter Email@address.com" , title: "Email")
                 InputView(text: $passwd, placeholder: "Enter Password", title: "Password", isSecureField: true)
                 registerButton()
@@ -29,6 +29,7 @@ struct RegisterView: View {
                         Alert(title:Text("Error") ,
                               message: Text(authViewModel.errorMessage))
                     })
+                Spacer()
             }
             .padding(.horizontal)
             .navigationDestination(isPresented: $isRegistered){

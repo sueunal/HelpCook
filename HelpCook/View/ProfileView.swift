@@ -13,32 +13,36 @@ struct ProfileView: View {
     @ObservedObject var imageViewModel = ImageViewModel()
     
     var body: some View {
-        VStack{
-            HStack(spacing: 20){
-                PhotosPicker(
-                    selection: $selectedItem,
-                    matching: .images
-                ){
-                    if imageViewModel.isDownload{
-                        loadedView()
-                    }else{
-                        photoSelectView()
+        NavigationStack{
+            VStack{
+                HStack(spacing: 20){
+                    PhotosPicker(
+                        selection: $selectedItem,
+                        matching: .images
+                    ){
+                        if imageViewModel.isDownload{
+                            loadedView()
+                        }else{
+                            photoSelectView()
+                        }
+                    }
+                    .padding()
+                    InfoView()
+                }
+                .onChange(of: selectedItem) { newItem in
+                    Task {
+                        if let data = try? await newItem?.loadTransferable(type: Data.self) {
+                            selectedImageData = data
+                            imageViewModel.StorageManger(data: data)
+                        }
                     }
                 }
-                .padding()
-                InfoView()
             }
+            .navigationTitle("프로필")
+            .navigationBarTitleDisplayMode(.automatic)
             Spacer()
-            .onChange(of: selectedItem) { newItem in
-                Task {
-                    if let data = try? await newItem?.loadTransferable(type: Data.self) {
-                        selectedImageData = data
-                        imageViewModel.StorageManger(data: data)
-                    }
-                }
-            }
         }.onAppear{
-//            imageViewModel.imageDonwload()
+            imageViewModel.imageDonwload()
         }
     }
     @ViewBuilder
@@ -51,7 +55,8 @@ struct ProfileView: View {
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 150, height: 150)
                 .background {
-                    Circle().fill(
+                    Circle()
+                        .fill(
                         LinearGradient(
                             colors: [.yellow, .orange],
                             startPoint: .top,

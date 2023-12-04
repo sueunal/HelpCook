@@ -66,7 +66,7 @@ struct CookView: View {
         } label: {
             HStack {
                 Image(systemName: "arrow.left")
-                    .foregroundStyle(.green)
+                    .foregroundStyle(.black)
                     .aspectRatio(contentMode: .fit)
             }
         }
