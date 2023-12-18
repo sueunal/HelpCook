@@ -8,9 +8,8 @@ import Foundation
 import SwiftSoup
 
 
-final class NetworkManager{
+class NetworkManager{
     static let share = NetworkManager()
-    var CookData: [cookItem] = []
     private init(){ }
     
     func getCookData(_ urlString: String, complation: @escaping (cookItem) -> Void){

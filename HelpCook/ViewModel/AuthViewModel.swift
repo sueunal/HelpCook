@@ -47,6 +47,9 @@ class AuthViewModel: ObservableObject {
     init() {
         self.userSession = Auth.auth().currentUser
     }
+    func getUserInfo(){
+//        Auth.auth().getStoredUser(forAccessGroup: "")
+    }
     func registerUser(email: String, password: String){
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if let error = error?.localizedDescription{

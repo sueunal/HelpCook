@@ -90,6 +90,12 @@ struct ProfileView: View {
             .resizable()
             .frame(width: 150, height: 150)
             .clipShape(Circle())
+            .overlay(content: {
+                Circle()
+                    .stroke()
+                    .stroke(lineWidth: 1)
+                    .foregroundStyle(.brown)
+            })
             .aspectRatio(contentMode: .fill)
             .frame(width: 150, height: 150)
     }
