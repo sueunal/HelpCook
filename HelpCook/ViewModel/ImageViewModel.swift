@@ -11,7 +11,7 @@ import SwiftUI
 
 
 class ImageViewModel: ObservableObject{
-    @Published var profileImage: Image = Image(systemName: "person.fill")
+    @Published var profileImage: Image = Image(systemName: "person.circle.fill")
     @Published var isDownload: Bool = false
     
     func StorageManger(data: Data){
