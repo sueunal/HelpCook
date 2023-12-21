@@ -18,7 +18,7 @@ struct senderView: View {
             
             messageContentView(messageContent: "안녕하세요")
         }.onAppear{
-            imageViewmodel.imageDonwload()
+//            imageViewmodel.imageDonwload()
         }
         .padding()
     }

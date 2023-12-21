@@ -40,7 +40,7 @@ class ImageViewModel: ObservableObject{
         let storageRef = storage.reference()
         let islandRef = storageRef.child("UserProfile/Images/rivers.jpg")
         
-        if self.profileImage != Image(systemName: "person.fill"){
+        if self.profileImage != Image(systemName: "person.circle.fill"){
             print("not Empty")
         }
         else{
