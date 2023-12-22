@@ -10,10 +10,12 @@ import FirebaseStorage
 import SwiftUI
 
 
-class ImageViewModel: ObservableObject{
-    @Published var profileImage: Image = Image(systemName: "person.circle.fill")
-    @Published var isDownload: Bool = false
+class ImageViewModel: ObservableObject {
+    @Published var profileImage: Image?
     
+    init() {
+        downloadImage()
+    }
     func StorageManger(data: Data){
         let storage = Storage.storage()
         let storageRef = storage.reference()
@@ -25,7 +27,11 @@ class ImageViewModel: ObservableObject{
         
         let uploadTask = riversRef.putData(data, metadata: storageMeta) { (metadata, error) in
             guard let metadata = metadata else {
-                print(metadata)
+                print(metadata?.md5Hash)
+                return
+            }
+            guard let error = error else{
+                print(error?.localizedDescription)
                 return
             }
             riversRef.downloadURL { (url, error) in
@@ -35,25 +41,18 @@ class ImageViewModel: ObservableObject{
             }
         }
     }
-    func imageDonwload(){
+    func downloadImage() {
         let storage = Storage.storage()
         let storageRef = storage.reference()
         let islandRef = storageRef.child("UserProfile/Images/rivers.jpg")
         
-        if self.profileImage != Image(systemName: "person.circle.fill"){
-            print("not Empty")
-        }
-        else{
-            islandRef.getData(maxSize: 4048 * 4048 ){data, error in
-                if let error = error {
-                    self.isDownload = false
-                    print(error)
-                } else {
-                    if let donwloadImage = UIImage(data: data!){
-                        self.profileImage = Image(uiImage: donwloadImage)
-                        self.isDownload = true
-                        print("Success!")
-                    }
+        islandRef.getData(maxSize: 4048 * 4048) { data, error in
+            if let error = error {
+                print("문제가 발생했습니다. \(error)")
+            } else {
+                if let data = data, let downloadedImage = UIImage(data: data) {
+                    self.profileImage = Image(uiImage: downloadedImage)
+                    print("Success!")
                 }
             }
         }

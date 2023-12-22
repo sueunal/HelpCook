@@ -11,6 +11,7 @@ struct MainTabView: View {
     @ObservedObject var viewModel = AuthViewModel()
     
     @State var showMainTabView: Bool = false
+    @State var user = UserModel(name: "", job: "", favorite: "")
     var body: some View {
         NavigationStack(root: {
             ZStack{
@@ -21,7 +22,7 @@ struct MainTabView: View {
                             .tabItem {
                                 Label("Home", systemImage: "house.fill")
                             }
-                        ChatView()
+                        ChatView(user: $user)
                             .tabItem {
                                 Label("Chat", systemImage: "message")
                             }

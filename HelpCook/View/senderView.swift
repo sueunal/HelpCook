@@ -8,19 +8,20 @@
 import SwiftUI
 
 struct senderView: View {
-    @ObservedObject var imageViewmodel = ImageViewModel()
+    @ObservedObject var imageViewModel = ImageViewModel()
     var body: some View {
-        HStack(alignment: .bottom, spacing: 10){
-            imageViewmodel.profileImage
-                .resizable()
-                .frame(width: 40, height: 40, alignment: .center)
-                .cornerRadius(20)
-            
-            messageContentView(messageContent: "안녕하세요")
-        }.onAppear{
-//            imageViewmodel.imageDonwload()
+        VStack{
+            if let profileImage = imageViewModel.profileImage {
+                HStack(alignment: .bottom, spacing: 10){
+                    profileImage
+                        .resizable()
+                        .frame(width: 40, height: 40, alignment: .center)
+                        .cornerRadius(20)
+                    messageContentView(messageContent: "안녕하세요")
+                }
+                .padding()
+            }
         }
-        .padding()
     }
 }
 

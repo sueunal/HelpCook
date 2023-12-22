@@ -6,10 +6,14 @@
 //
 
 import Foundation
+import SwiftUI
 
 
-struct InfoModel{
+struct UserModel{
     var name: String
+    var image: Image?
     var job: String
     var favorite: String
+    
+    static let dummy = UserModel(name: "sueunkim", job: "iOS Developer", favorite: "iOS")
 }

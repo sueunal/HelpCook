@@ -10,6 +10,8 @@ import PhotosUI
 struct ProfileView: View {
     @State private var selectedItem: PhotosPickerItem? = nil
     @State private var selectedImageData: Data? = nil
+    @State var user = UserModel(name: "수은", job: "iOS Developer", favorite: "iOS")
+    @State var onSheet: Bool = false
     @ObservedObject var imageViewModel = ImageViewModel()
     
     var body: some View {
@@ -20,14 +22,29 @@ struct ProfileView: View {
                         selection: $selectedItem,
                         matching: .images
                     ){
-                        if imageViewModel.isDownload{
-                            loadedView()
-                        }else{
-                            photoSelectView()
+                        if let profileImage = imageViewModel.profileImage{
+                            profileImage
+                                .resizable()
+                                .frame(width: 150, height: 150)
+                                .clipShape(Circle())
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 150, height: 150)
+                                .background {
+                                    Circle()
+                                        .fill(
+                                            LinearGradient(
+                                                colors: [.yellow, .orange],
+                                                startPoint: .top,
+                                                endPoint: .bottom
+                                            )
+                                        )
+                                }
+                        } else {
+                            ProgressView()
                         }
                     }
                     .padding()
-                    InfoView()
+                    InfoView(user: $user)
                 }
                 .onChange(of: selectedItem) { newItem in
                     Task {
@@ -40,9 +57,19 @@ struct ProfileView: View {
             }
             .navigationTitle("프로필")
             .navigationBarTitleDisplayMode(.automatic)
+            .toolbar{
+                ToolbarItem {
+                    Button{
+                        onSheet = true
+                    }label: {
+                        Image(systemName: "gear")
+                    }
+                    .sheet(isPresented: $onSheet, content: {
+                        SettingsView(user: $user, confirm: $onSheet)
+                    })
+                }
+            }
             Spacer()
-        }.onAppear{
-            imageViewModel.imageDonwload()
         }
     }
     @ViewBuilder
@@ -86,18 +113,18 @@ struct ProfileView: View {
     }
     @ViewBuilder
     func loadedView()-> some View{
-        imageViewModel.profileImage
-            .resizable()
-            .frame(width: 150, height: 150)
-            .clipShape(Circle())
-            .overlay(content: {
-                Circle()
-                    .stroke()
-                    .stroke(lineWidth: 1)
-                    .foregroundStyle(.brown)
-            })
-            .aspectRatio(contentMode: .fill)
-            .frame(width: 150, height: 150)
+//        profileImage
+//            .resizable()
+//            .frame(width: 150, height: 150)
+//            .clipShape(Circle())
+//            .overlay(content: {
+//                Circle()
+//                    .stroke()
+//                    .stroke(lineWidth: 1)
+//                    .foregroundStyle(.brown)
+//            })
+//            .aspectRatio(contentMode: .fill)
+//            .frame(width: 150, height: 150)
     }
 }
                    

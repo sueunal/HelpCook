@@ -8,25 +8,23 @@
 import SwiftUI
 
 struct InfoView: View {
-    @State private var name: String = "수은"
-    @State private var jobs: String = "iOS Developer"
-    @State private var favorite: String = "#ios #frontEnd #web #server"
+    @Binding var user: UserModel
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10){
-            Text(name)
+            Text(user.name)
                 .font(.title3)
                 .bold()
             Divider().background(
                 LinearGradient(gradient: Gradient(colors: [Color.cyan, Color.blue]), startPoint: .leading, endPoint: .trailing)
             )
-            Text(jobs)
+            Text(user.job)
                 .bold()
             Divider()
                 .background(
                 LinearGradient(gradient: Gradient(colors: [Color.cyan, Color.blue]), startPoint: .leading, endPoint: .trailing)
                 )
-            Text(favorite)
+            Text(user.favorite)
                 .bold()
                 .foregroundStyle(.cyan)
             Divider()
@@ -38,5 +36,5 @@ struct InfoView: View {
 }
 
 #Preview {
-    InfoView()
+    InfoView(user: .constant(.dummy))
 }

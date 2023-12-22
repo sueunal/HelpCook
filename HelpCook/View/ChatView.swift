@@ -23,6 +23,7 @@ struct ChatView: View {
     
     @State var inputMessage: String = ""
     @State var isEmty: Bool = false
+    @Binding var user: UserModel
     let contentMessage: String = "hello my name is"
     var message = Message()
     var body: some View {
@@ -38,7 +39,7 @@ struct ChatView: View {
                 }
                 HStack{
                     Spacer()
-                    VStack{
+                    VStack(alignment: .trailing){
                         ForEach(message.message,id:\.self){ message in
                             messageContentView(messageContent: message)
                         }
@@ -91,5 +92,5 @@ struct ChatView: View {
 }
 
 #Preview {
-    ChatView()
+    ChatView(user: .constant(.dummy))
 }
