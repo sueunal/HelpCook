@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseAuth
+import Firebase
 
 
 enum AuthState{
@@ -21,16 +22,43 @@ enum AuthError: String, Error{
     case notProvided = "이메일이 입력되지 않았습니다."
     case invalidIdOrPw = "아이디 또는 비밀번호가 틀립니다."
 }
+
 class AuthViewModel: ObservableObject {
     @Published var loginStatus: Bool = false
     @Published var isRegistered: Bool = false
     @Published var errorMessage: String = ""
     @Published var isLoggin: Bool = false
     @Published var userSession: FirebaseAuth.User?
-
+    let db = Firestore.firestore()
     
     init() {
         self.userSession = Auth.auth().currentUser
+    }
+       
+    func saveUserInformation(nickName: String) {
+        let collectionPath = Firestore.firestore().collection("users")
+        let userID = Auth.auth().currentUser?.uid
+        
+        collectionPath.document("\(userID ?? "")").updateData(["nickname": nickName]) { error in
+            if let error = error {
+                print((error.localizedDescription))
+                return
+            }
+        }
+        
+        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+        
+        changeRequest?.displayName = nickName
+        changeRequest?.commitChanges() { error in
+            if let error = error {
+                print("[ERROR] : photoURL 변경 중 에러 발생 \(error.localizedDescription)")
+            }
+            else {
+                print("[DEBUG] : dispalyName 변경 성공")
+                
+            }
+        }
+        Auth.auth().currentUser?.reload()
     }
     func getUserInfo(){
 //        Auth.auth().getStoredUser(forAccessGroup: "")

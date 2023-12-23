@@ -10,9 +10,11 @@ import PhotosUI
 struct ProfileView: View {
     @State private var selectedItem: PhotosPickerItem? = nil
     @State private var selectedImageData: Data? = nil
-    @State var user = UserModel(name: "수은", job: "iOS Developer", favorite: "iOS")
+    @State var user = UserModel(username: "수은", job: "iOS Developer", favorite: "iOS")
     @State var onSheet: Bool = false
     @ObservedObject var imageViewModel = ImageViewModel()
+    
+    let profileImages : Image = Image(systemName: "person.circle.fill")
     
     var body: some View {
         NavigationStack{
@@ -28,17 +30,6 @@ struct ProfileView: View {
                                 .frame(width: 150, height: 150)
                                 .clipShape(Circle())
                                 .aspectRatio(contentMode: .fill)
-                                .frame(width: 150, height: 150)
-                                .background {
-                                    Circle()
-                                        .fill(
-                                            LinearGradient(
-                                                colors: [.yellow, .orange],
-                                                startPoint: .top,
-                                                endPoint: .bottom
-                                            )
-                                        )
-                                }
                         } else {
                             ProgressView()
                         }
@@ -56,7 +47,7 @@ struct ProfileView: View {
                 }
             }
             .navigationTitle("프로필")
-            .navigationBarTitleDisplayMode(.automatic)
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar{
                 ToolbarItem {
                     Button{
@@ -110,21 +101,6 @@ struct ProfileView: View {
                     )
                 }
         }
-    }
-    @ViewBuilder
-    func loadedView()-> some View{
-//        profileImage
-//            .resizable()
-//            .frame(width: 150, height: 150)
-//            .clipShape(Circle())
-//            .overlay(content: {
-//                Circle()
-//                    .stroke()
-//                    .stroke(lineWidth: 1)
-//                    .foregroundStyle(.brown)
-//            })
-//            .aspectRatio(contentMode: .fill)
-//            .frame(width: 150, height: 150)
     }
 }
                    

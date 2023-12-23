@@ -31,7 +31,8 @@ struct loginView: View {
                 Spacer()
             }
             .navigationDestination(isPresented: $showMainTabView){
-                MainTabView()
+                SetUserInformation()
+                    .environmentObject(authViewModel)
                     .navigationBarBackButtonHidden(true)
             }
         }

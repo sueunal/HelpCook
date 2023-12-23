@@ -12,7 +12,7 @@ struct InfoView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10){
-            Text(user.name)
+            Text(user.username)
                 .font(.title3)
                 .bold()
             Divider().background(

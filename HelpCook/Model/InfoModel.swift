@@ -10,10 +10,10 @@ import SwiftUI
 
 
 struct UserModel{
-    var name: String
-    var image: Image?
-    var job: String
-    var favorite: String
+    var username: String = ""
+    var image: Image? = nil
+    var job: String = ""
+    var favorite: String = ""
     
-    static let dummy = UserModel(name: "sueunkim", job: "iOS Developer", favorite: "iOS")
+    static let dummy = UserModel(username: "sueunkim", job: "iOS Developer", favorite: "iOS")
 }

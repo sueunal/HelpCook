@@ -12,6 +12,7 @@
 		2C3BD01D2B122AE90090E29F /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 2C3BD01C2B122AE90090E29F /* FirebaseStorage */; };
 		2C6486802B2EBE9A00387383 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2C64867F2B2EBE9A00387383 /* FirebaseFirestore */; };
 		2C6486822B2EBF7300387383 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 2C6486812B2EBF7300387383 /* FirebaseMessaging */; };
+		2C64A7102B36BDEE00E4D2E2 /* SetUserInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C64A70F2B36BDEE00E4D2E2 /* SetUserInformation.swift */; };
 		2C68BB332AE9044A000FD360 /* HelpCookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68BB322AE9044A000FD360 /* HelpCookApp.swift */; };
 		2C68BB352AE9044A000FD360 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68BB342AE9044A000FD360 /* MainTabView.swift */; };
 		2C68BB372AE9044B000FD360 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C68BB362AE9044B000FD360 /* Assets.xcassets */; };
@@ -59,6 +60,7 @@
 
 /* Begin PBXFileReference section */
 		2C0E8F352B35B7F200449A7A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		2C64A70F2B36BDEE00E4D2E2 /* SetUserInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUserInformation.swift; sourceTree = "<group>"; };
 		2C68BB2F2AE9044A000FD360 /* 요리왕.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "요리왕.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C68BB322AE9044A000FD360 /* HelpCookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCookApp.swift; sourceTree = "<group>"; };
 		2C68BB342AE9044A000FD360 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				2C909E642AEE47F000253954 /* CookView.swift */,
 				2C0E8F352B35B7F200449A7A /* SettingsView.swift */,
 				2C68BB612AE906B8000FD360 /* ProfileView.swift */,
+				2C64A70F2B36BDEE00E4D2E2 /* SetUserInformation.swift */,
 				2CA61ADE2B1A06F800D1239C /* InfoView.swift */,
 			);
 			path = View;
@@ -380,6 +383,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C64A7102B36BDEE00E4D2E2 /* SetUserInformation.swift in Sources */,
 				2C909E652AEE47F000253954 /* CookView.swift in Sources */,
 				2CF6EBEB2B05EC0800C956DA /* CookViewModel.swift in Sources */,
 				2CC2D2E42AEBEA520003AC93 /* ImageViewModel.swift in Sources */,

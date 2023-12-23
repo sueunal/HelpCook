@@ -11,7 +11,7 @@ struct MainTabView: View {
     @ObservedObject var viewModel = AuthViewModel()
     
     @State var showMainTabView: Bool = false
-    @State var user = UserModel(name: "", job: "", favorite: "")
+    @State var user = UserModel()
     var body: some View {
         NavigationStack(root: {
             ZStack{
