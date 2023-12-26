@@ -15,17 +15,20 @@ struct SetUserInformation: View {
     @State private var next: Bool = false
     @ObservedObject var authViewModel = AuthViewModel()
     @ObservedObject var imageViewModel = ImageViewModel()
+    
     var body: some View {
         NavigationStack{
             VStack{
                 SetImage()
                 InputView(text: $user.username, placeholder: "이름을 입력해주세요", title: "이름")
+                NextButton()
                 Spacer()
                     .frame(height: 200)
             }
-        }
-        .navigationDestination(isPresented: $next) {
-            
+            .navigationDestination(isPresented: $next) {
+                MainTabView(user: $user)
+                    .navigationBarBackButtonHidden(true)
+            }
         }
     }
     @ViewBuilder
@@ -34,8 +37,13 @@ struct SetUserInformation: View {
           next = true
         }label: {
             Text("다음")
-                .foregroundStyle(.blue)
+                .foregroundStyle(.white)
+                .fontWeight(.heavy)
         }
+        .disabled(user.username.isEmpty)
+        .background(.blue)
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .buttonStyle(.borderedProminent)
     }
     @ViewBuilder
     func SetImage() -> some View{

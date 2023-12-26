@@ -10,6 +10,8 @@
 		2C0E8F362B35B7F200449A7A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0E8F352B35B7F200449A7A /* SettingsView.swift */; };
 		2C3300D52AEEAD0400E56B9C /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 2C3300D42AEEAD0400E56B9C /* SwiftSoup */; };
 		2C3BD01D2B122AE90090E29F /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 2C3BD01C2B122AE90090E29F /* FirebaseStorage */; };
+		2C48F9A82B3AB5DA005D89F3 /* MySQLKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2C48F9A72B3AB5DA005D89F3 /* MySQLKit */; };
+		2C48F9AA2B3AB60F005D89F3 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C48F9A92B3AB60F005D89F3 /* DB.swift */; };
 		2C6486802B2EBE9A00387383 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2C64867F2B2EBE9A00387383 /* FirebaseFirestore */; };
 		2C6486822B2EBF7300387383 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 2C6486812B2EBF7300387383 /* FirebaseMessaging */; };
 		2C64A7102B36BDEE00E4D2E2 /* SetUserInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C64A70F2B36BDEE00E4D2E2 /* SetUserInformation.swift */; };
@@ -60,6 +62,7 @@
 
 /* Begin PBXFileReference section */
 		2C0E8F352B35B7F200449A7A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		2C48F9A92B3AB60F005D89F3 /* DB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB.swift; sourceTree = "<group>"; };
 		2C64A70F2B36BDEE00E4D2E2 /* SetUserInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUserInformation.swift; sourceTree = "<group>"; };
 		2C68BB2F2AE9044A000FD360 /* 요리왕.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "요리왕.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C68BB322AE9044A000FD360 /* HelpCookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCookApp.swift; sourceTree = "<group>"; };
@@ -101,6 +104,7 @@
 				2C3300D52AEEAD0400E56B9C /* SwiftSoup in Frameworks */,
 				2C78C9392B0A4D8E0050AE46 /* FirebaseAuth in Frameworks */,
 				2C6486802B2EBE9A00387383 /* FirebaseFirestore in Frameworks */,
+				2C48F9A82B3AB5DA005D89F3 /* MySQLKit in Frameworks */,
 				2C3BD01D2B122AE90090E29F /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,6 +229,7 @@
 			children = (
 				2CF6EBE72B05E8A000C956DA /* CookItem.swift */,
 				2C8DB9352B1B01AC00A44881 /* InfoModel.swift */,
+				2C48F9A92B3AB60F005D89F3 /* DB.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -261,6 +266,7 @@
 				2C3BD01C2B122AE90090E29F /* FirebaseStorage */,
 				2C64867F2B2EBE9A00387383 /* FirebaseFirestore */,
 				2C6486812B2EBF7300387383 /* FirebaseMessaging */,
+				2C48F9A72B3AB5DA005D89F3 /* MySQLKit */,
 			);
 			productName = HelpCook;
 			productReference = 2C68BB2F2AE9044A000FD360 /* 요리왕.app */;
@@ -338,6 +344,8 @@
 				2C3300D32AEEAD0400E56B9C /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				2C78C9342B0A4AEA0050AE46 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				2C64867C2B2EAF2900387383 /* XCRemoteSwiftPackageReference "ChatUI" */,
+				2C48F9A32B3AAF2D005D89F3 /* XCRemoteSwiftPackageReference "Perfect-MySQL" */,
+				2C48F9A62B3AB5D9005D89F3 /* XCRemoteSwiftPackageReference "mysql-kit" */,
 			);
 			productRefGroup = 2C68BB302AE9044A000FD360 /* Products */;
 			projectDirPath = "";
@@ -384,6 +392,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C64A7102B36BDEE00E4D2E2 /* SetUserInformation.swift in Sources */,
+				2C48F9AA2B3AB60F005D89F3 /* DB.swift in Sources */,
 				2C909E652AEE47F000253954 /* CookView.swift in Sources */,
 				2CF6EBEB2B05EC0800C956DA /* CookViewModel.swift in Sources */,
 				2CC2D2E42AEBEA520003AC93 /* ImageViewModel.swift in Sources */,
@@ -747,6 +756,22 @@
 				minimumVersion = 2.6.1;
 			};
 		};
+		2C48F9A32B3AAF2D005D89F3 /* XCRemoteSwiftPackageReference "Perfect-MySQL" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/PerfectlySoft/Perfect-MySQL.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.5.1;
+			};
+		};
+		2C48F9A62B3AB5D9005D89F3 /* XCRemoteSwiftPackageReference "mysql-kit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vapor/mysql-kit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.7.1;
+			};
+		};
 		2C64867C2B2EAF2900387383 /* XCRemoteSwiftPackageReference "ChatUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/x-0o0/ChatUI.git";
@@ -775,6 +800,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2C78C9342B0A4AEA0050AE46 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		2C48F9A72B3AB5DA005D89F3 /* MySQLKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2C48F9A62B3AB5D9005D89F3 /* XCRemoteSwiftPackageReference "mysql-kit" */;
+			productName = MySQLKit;
 		};
 		2C64867F2B2EBE9A00387383 /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -48,7 +48,7 @@ class ImageViewModel: ObservableObject {
         
         islandRef.getData(maxSize: 4048 * 4048) { data, error in
             if let error = error {
-                print("문제가 발생했습니다. \(error)")
+                print("문제가 발생했습니다. \(error.localizedDescription)")
             } else {
                 if let data = data, let downloadedImage = UIImage(data: data) {
                     self.profileImage = Image(uiImage: downloadedImage)

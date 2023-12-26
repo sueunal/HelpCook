@@ -10,7 +10,7 @@ import PhotosUI
 struct ProfileView: View {
     @State private var selectedItem: PhotosPickerItem? = nil
     @State private var selectedImageData: Data? = nil
-    @State var user = UserModel(username: "수은", job: "iOS Developer", favorite: "iOS")
+    @Binding var user: UserModel
     @State var onSheet: Bool = false
     @ObservedObject var imageViewModel = ImageViewModel()
     
@@ -106,5 +106,5 @@ struct ProfileView: View {
                    
 
 #Preview {
-    ProfileView()
+    ProfileView(user: .constant(.dummy))
 }
