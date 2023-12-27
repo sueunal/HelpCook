@@ -11,7 +11,6 @@
 		2C3300D52AEEAD0400E56B9C /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 2C3300D42AEEAD0400E56B9C /* SwiftSoup */; };
 		2C3BD01D2B122AE90090E29F /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 2C3BD01C2B122AE90090E29F /* FirebaseStorage */; };
 		2C48F9A82B3AB5DA005D89F3 /* MySQLKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2C48F9A72B3AB5DA005D89F3 /* MySQLKit */; };
-		2C48F9AA2B3AB60F005D89F3 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C48F9A92B3AB60F005D89F3 /* DB.swift */; };
 		2C6486802B2EBE9A00387383 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2C64867F2B2EBE9A00387383 /* FirebaseFirestore */; };
 		2C6486822B2EBF7300387383 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 2C6486812B2EBF7300387383 /* FirebaseMessaging */; };
 		2C64A7102B36BDEE00E4D2E2 /* SetUserInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C64A70F2B36BDEE00E4D2E2 /* SetUserInformation.swift */; };
@@ -33,10 +32,11 @@
 		2C78C9332B0A4AA90050AE46 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C78C9322B0A4AA90050AE46 /* GoogleService-Info.plist */; };
 		2C78C9362B0A4C3B0050AE46 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C78C9352B0A4C3B0050AE46 /* AuthViewModel.swift */; };
 		2C78C9392B0A4D8E0050AE46 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 2C78C9382B0A4D8E0050AE46 /* FirebaseAuth */; };
-		2C8DB9362B1B01AC00A44881 /* InfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8DB9352B1B01AC00A44881 /* InfoModel.swift */; };
+		2C8DB9362B1B01AC00A44881 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8DB9352B1B01AC00A44881 /* UserModel.swift */; };
 		2C909E652AEE47F000253954 /* CookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C909E642AEE47F000253954 /* CookView.swift */; };
 		2CA61ADF2B1A06F800D1239C /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA61ADE2B1A06F800D1239C /* InfoView.swift */; };
 		2CC2D2E42AEBEA520003AC93 /* ImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC2D2E32AEBEA520003AC93 /* ImageViewModel.swift */; };
+		2CD938C32B3C53D700FF12D0 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD938C22B3C53D700FF12D0 /* UserViewModel.swift */; };
 		2CED54EE2AF0F43F006CF6F0 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED54ED2AF0F43F006CF6F0 /* NetworkManager.swift */; };
 		2CF5141F2B0B387D004EAFA6 /* loginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF5141E2B0B387D004EAFA6 /* loginView.swift */; };
 		2CF6EBE82B05E8A000C956DA /* CookItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF6EBE72B05E8A000C956DA /* CookItem.swift */; };
@@ -62,7 +62,6 @@
 
 /* Begin PBXFileReference section */
 		2C0E8F352B35B7F200449A7A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		2C48F9A92B3AB60F005D89F3 /* DB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB.swift; sourceTree = "<group>"; };
 		2C64A70F2B36BDEE00E4D2E2 /* SetUserInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUserInformation.swift; sourceTree = "<group>"; };
 		2C68BB2F2AE9044A000FD360 /* 요리왕.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "요리왕.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C68BB322AE9044A000FD360 /* HelpCookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCookApp.swift; sourceTree = "<group>"; };
@@ -85,10 +84,11 @@
 		2C78C9302B0A46F70050AE46 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		2C78C9322B0A4AA90050AE46 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2C78C9352B0A4C3B0050AE46 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
-		2C8DB9352B1B01AC00A44881 /* InfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoModel.swift; sourceTree = "<group>"; };
+		2C8DB9352B1B01AC00A44881 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		2C909E642AEE47F000253954 /* CookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookView.swift; sourceTree = "<group>"; };
 		2CA61ADE2B1A06F800D1239C /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		2CC2D2E32AEBEA520003AC93 /* ImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewModel.swift; sourceTree = "<group>"; };
+		2CD938C22B3C53D700FF12D0 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		2CED54ED2AF0F43F006CF6F0 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		2CF5141E2B0B387D004EAFA6 /* loginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginView.swift; sourceTree = "<group>"; };
 		2CF6EBE72B05E8A000C956DA /* CookItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookItem.swift; sourceTree = "<group>"; };
@@ -196,12 +196,12 @@
 				2C68BB342AE9044A000FD360 /* MainTabView.swift */,
 				2C68BB5D2AE90589000FD360 /* HomeView.swift */,
 				2C68BB5F2AE90652000FD360 /* ChatView.swift */,
+				2C64A70F2B36BDEE00E4D2E2 /* SetUserInformation.swift */,
 				2C71BBAA2B307E5000C471B6 /* messageContentView.swift */,
 				2C71BBAC2B30804000C471B6 /* senderView.swift */,
 				2C909E642AEE47F000253954 /* CookView.swift */,
 				2C0E8F352B35B7F200449A7A /* SettingsView.swift */,
 				2C68BB612AE906B8000FD360 /* ProfileView.swift */,
-				2C64A70F2B36BDEE00E4D2E2 /* SetUserInformation.swift */,
 				2CA61ADE2B1A06F800D1239C /* InfoView.swift */,
 			);
 			path = View;
@@ -228,8 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				2CF6EBE72B05E8A000C956DA /* CookItem.swift */,
-				2C8DB9352B1B01AC00A44881 /* InfoModel.swift */,
-				2C48F9A92B3AB60F005D89F3 /* DB.swift */,
+				2C8DB9352B1B01AC00A44881 /* UserModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -240,6 +239,7 @@
 				2CF6EBEA2B05EC0800C956DA /* CookViewModel.swift */,
 				2CC2D2E32AEBEA520003AC93 /* ImageViewModel.swift */,
 				2C78C9352B0A4C3B0050AE46 /* AuthViewModel.swift */,
+				2CD938C22B3C53D700FF12D0 /* UserViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -392,7 +392,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C64A7102B36BDEE00E4D2E2 /* SetUserInformation.swift in Sources */,
-				2C48F9AA2B3AB60F005D89F3 /* DB.swift in Sources */,
 				2C909E652AEE47F000253954 /* CookView.swift in Sources */,
 				2CF6EBEB2B05EC0800C956DA /* CookViewModel.swift in Sources */,
 				2CC2D2E42AEBEA520003AC93 /* ImageViewModel.swift in Sources */,
@@ -400,7 +399,7 @@
 				2C68BB352AE9044A000FD360 /* MainTabView.swift in Sources */,
 				2C68BB622AE906B8000FD360 /* ProfileView.swift in Sources */,
 				2CED54EE2AF0F43F006CF6F0 /* NetworkManager.swift in Sources */,
-				2C8DB9362B1B01AC00A44881 /* InfoModel.swift in Sources */,
+				2C8DB9362B1B01AC00A44881 /* UserModel.swift in Sources */,
 				2CF6EBE82B05E8A000C956DA /* CookItem.swift in Sources */,
 				2C71BBAB2B307E5000C471B6 /* messageContentView.swift in Sources */,
 				2C78C9312B0A46F70050AE46 /* InputView.swift in Sources */,
@@ -411,6 +410,7 @@
 				2CF5141F2B0B387D004EAFA6 /* loginView.swift in Sources */,
 				2CA61ADF2B1A06F800D1239C /* InfoView.swift in Sources */,
 				2C68BB332AE9044A000FD360 /* HelpCookApp.swift in Sources */,
+				2CD938C32B3C53D700FF12D0 /* UserViewModel.swift in Sources */,
 				2C71BBAD2B30804000C471B6 /* senderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

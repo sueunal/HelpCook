@@ -9,10 +9,10 @@ import SwiftUI
 
 struct InfoView: View {
     @Binding var user: UserModel
-    
+    @StateObject var viewModel = UserViewModel()
     var body: some View {
         VStack(alignment: .leading, spacing: 10){
-            Text(user.username)
+            Text(user.name)
                 .font(.title3)
                 .bold()
             Divider().background(
@@ -20,13 +20,6 @@ struct InfoView: View {
             )
             Text(user.job)
                 .bold()
-            Divider()
-                .background(
-                LinearGradient(gradient: Gradient(colors: [Color.cyan, Color.blue]), startPoint: .leading, endPoint: .trailing)
-                )
-            Text(user.favorite)
-                .bold()
-                .foregroundStyle(.cyan)
             Divider()
                 .background(
                 LinearGradient(gradient: Gradient(colors: [Color.cyan, Color.blue]), startPoint: .leading, endPoint: .trailing)

@@ -20,7 +20,7 @@ struct SetUserInformation: View {
         NavigationStack{
             VStack{
                 SetImage()
-                InputView(text: $user.username, placeholder: "이름을 입력해주세요", title: "이름")
+                InputView(text: $user.name, placeholder: "이름을 입력해주세요", title: "이름")
                 NextButton()
                 Spacer()
                     .frame(height: 200)
@@ -40,8 +40,8 @@ struct SetUserInformation: View {
                 .foregroundStyle(.white)
                 .fontWeight(.heavy)
         }
-        .disabled(user.username.isEmpty)
-        .background(.blue)
+        .disabled(user.name.isEmpty)
+        .background(user.name.isEmpty ? .gray : .blue)
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .buttonStyle(.borderedProminent)
     }
@@ -63,8 +63,7 @@ struct SetUserInformation: View {
                     Image(systemName: "person.circle.fill")
                         .resizable()
                         .frame(width: 200, height: 200)
-                        .clipShape(Circle()
-                        )
+                        .clipShape(Circle())
                         .foregroundStyle(
                             LinearGradient(colors: [Color.black,Color.gray], startPoint: .topLeading, endPoint: .bottomTrailing)
                         )

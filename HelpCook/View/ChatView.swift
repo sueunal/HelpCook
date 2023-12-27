@@ -47,47 +47,32 @@ struct ChatView: View {
                     }
                 }
             }
-                Spacer()
+            Spacer()
+            HStack(alignment: .center){
                 messageInputView()
+                sendButtonView()
+            }
         }
     }
     @ViewBuilder
     func messageInputView()-> some View{
         HStack(alignment: .center){
             InputView(text: $inputMessage, placeholder: "메시지를 입력해주세요", title: "")
-            if inputMessage.isEmpty{
-                Button{
-                    message.messageInput(inputMessage)
-                }label: {
-                    Image(systemName: "arrow.up")
-                        .frame(width: 20,height: 25)
-                        .foregroundStyle(.black)
-                        .padding()
-                        .background(
-                            Circle()
-                                .foregroundStyle(.gray)
-                                .frame(width: 35,height: 35)
-                        )
-                }
-                .disabled(inputMessage.isEmpty)
-            }else{
-                Button{
-                    message.messageInput(inputMessage)
-                }label: {
-                    Image(systemName: "arrow.up")
-                        .frame(width: 20,height: 25)
-                        .foregroundStyle(.black)
-                        .padding()
-                        .background(
-                            Circle()
-                                .foregroundStyle(.yellow)
-                                .frame(width: 35,height: 35)
-                        )
-                }
-                .disabled(inputMessage.isEmpty)
-                
-            }
         }
+    }
+    @ViewBuilder
+    func sendButtonView()-> some View{
+        Button{
+            message.messageInput(inputMessage)
+        }label: {
+            Image(systemName: "arrow.up")
+                .resizable()
+                .frame(width: 20,height: 25)
+                .foregroundStyle(.black)
+                .padding()
+                .background(Circle().frame(width: 35,height: 35).foregroundStyle(inputMessage.isEmpty ? .gray : .yellow))
+        }
+        .disabled(inputMessage.isEmpty)
     }
 }
 
