@@ -8,32 +8,32 @@
 import SwiftUI
 
 class UserViewModel: ObservableObject{
-    @Published var items = [UserModel]()
+    @Published var items : [UserModel] = []
     let prefixURL = "http://localhost"
     init(){
         fetchPost()
     }
     func fetchPost(){
-        guard let url = URL(string: "\(prefixURL)/index.php") else{
+        guard let url = URL(string: "\(prefixURL)/posts") else{
             print("Not found URL")
             return
         }
-        URLSession.shared.dataTask(with: url){ data, res, error in
-            if let error = error {
-                print("error : \(error.localizedDescription)")
-            }
+        URLSession.shared.dataTask(with: url){ data, response, error in
             do{
                 if let data = data{
-                    let result  = try JSONDecoder().decode(Models.self, from: data)
+                    let result = try JSONDecoder().decode(Models.self, from: data)
                     DispatchQueue.main.async {
-                        self.items = result.data
+                        self.items.append(contentsOf: result.data)
                     }
                 }else{
-                    print("No data..")
+                    print(data)
+                    print("No Data..")
                 }
-                
             }catch let JsonError{
-                print("fetch json error:", JsonError.localizedDescription)
+                if let data = data{
+                    print(data)
+                    print("fetch json error:", JsonError.localizedDescription)
+                }
             }
         }.resume()
     }

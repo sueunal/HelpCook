@@ -35,7 +35,7 @@ struct ProfileView: View {
                         }
                     }
                     .padding()
-                    InfoView(user: $user)
+                    InfoView()
                 }
                 .onChange(of: selectedItem) { newItem in
                     Task {

@@ -10,15 +10,15 @@ import SwiftUI
 
 
 struct Models: Decodable{
-    let error : String
+    let error : Bool
     let message: String
-    let data : [UserModel]
+    var data : [UserModel]
 }
 
 struct UserModel: Decodable{
-    var name : String = ""
-    var image: Data? = nil
-    var job: String = ""
+    var name : String
+    var image: String
+    var job: String
     
-    static let dummy = UserModel(name: "sueunkim", job: "iOS Developer")
+    static let dummy = UserModel(name: "sueunkim", image: "", job: "iOS Developer")
 }

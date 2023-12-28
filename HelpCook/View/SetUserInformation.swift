@@ -7,9 +7,12 @@
 
 import SwiftUI
 import PhotosUI
-
+struct temp{
+    var name: String
+    var job: String
+}
 struct SetUserInformation: View {
-    @State var user = UserModel()
+    @State var user = temp(name: "", job: "")
     @State private var selectedItem: PhotosPickerItem? = nil
     @State private var selectedImageData: Data? = nil
     @State private var next: Bool = false
@@ -26,8 +29,8 @@ struct SetUserInformation: View {
                     .frame(height: 200)
             }
             .navigationDestination(isPresented: $next) {
-                MainTabView(user: $user)
-                    .navigationBarBackButtonHidden(true)
+//                MainTabView(user: $user)
+//                    .navigationBarBackButtonHidden(true)
             }
         }
     }
