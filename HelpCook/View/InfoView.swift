@@ -11,19 +11,20 @@ struct InfoView: View {
     @StateObject var viewModel = UserViewModel()
     var body: some View {
         VStack(alignment: .leading, spacing: 10){
-            Text(viewModel.items.description)
-//            Text(viewModel.items.first)
-//                .font(.title3)
-//                .bold()
-//            Divider().background(
-//                LinearGradient(gradient: Gradient(colors: [Color.cyan, Color.blue]), startPoint: .leading, endPoint: .trailing)
-//            )
-//            Text(viewModel.job)
-//                .bold()
-//            Divider()
-//                .background(
-//                LinearGradient(gradient: Gradient(colors: [Color.cyan, Color.blue]), startPoint: .leading, endPoint: .trailing)
-//                )
+            Text(viewModel.items.name)
+                .fontWeight(.heavy)
+                .font(.system(size: 24))
+                .fontDesign(.serif)
+            Divider()
+            Text(viewModel.items.job)
+                .font(.system(size: 24))
+                .fontWeight(.bold)
+                .fontDesign(.serif)
+            Divider()
+            Text(viewModel.items.image)
+                .font(.system(size: 24))
+                .fontWeight(.bold)
+            Divider()
         }
     }
 }
