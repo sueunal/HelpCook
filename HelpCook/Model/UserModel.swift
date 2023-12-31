@@ -9,16 +9,14 @@ import Foundation
 import SwiftUI
 
 
-struct Models: Decodable{
-    let error : Bool
-    let message: String
-    var data : [UserModel]
-}
+//struct Models: Decodable{
+//    var data : [UserModel]
+//}
 
-struct UserModel: Decodable{
+struct UserModel: Decodable, Hashable{
     var name : String
-    var image: String
     var job: String
+    var image: String
     
-    static let dummy = UserModel(name: "sueunkim", image: "", job: "iOS Developer")
+    static let dummy = UserModel(name: "Example Name", job: "Example job", image: "Example Image")
 }

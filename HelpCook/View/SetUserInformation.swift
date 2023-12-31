@@ -7,15 +7,13 @@
 
 import SwiftUI
 import PhotosUI
-struct temp{
-    var name: String
-    var job: String
-}
+
 struct SetUserInformation: View {
-    @State var user = temp(name: "", job: "")
     @State private var selectedItem: PhotosPickerItem? = nil
     @State private var selectedImageData: Data? = nil
     @State private var next: Bool = false
+    @State var name: String = ""
+    @ObservedObject var userViewModel = UserViewModel()
     @ObservedObject var authViewModel = AuthViewModel()
     @ObservedObject var imageViewModel = ImageViewModel()
     
@@ -23,28 +21,29 @@ struct SetUserInformation: View {
         NavigationStack{
             VStack{
                 SetImage()
-                InputView(text: $user.name, placeholder: "이름을 입력해주세요", title: "이름")
+                InputView(text: $name, placeholder: "이름을 입력해주세요", title: "이름")
                 NextButton()
                 Spacer()
                     .frame(height: 200)
             }
-            .navigationDestination(isPresented: $next) {
-//                MainTabView(user: $user)
-//                    .navigationBarBackButtonHidden(true)
-            }
+            //            .navigationDestination(isPresented: $next) {
+            //                MainTabView()
+            //                    .navigationBarBackButtonHidden(true)
+            //                    .environmentObject(userViewModel)
+            //
         }
     }
     @ViewBuilder
     func NextButton()-> some View{
         Button{
-          next = true
+            userViewModel.insertData(parameter: ["name": name, "job":"developer", "image": "name"])
         }label: {
             Text("다음")
                 .foregroundStyle(.white)
                 .fontWeight(.heavy)
         }
-        .disabled(user.name.isEmpty)
-        .background(user.name.isEmpty ? .gray : .blue)
+        .disabled(name.isEmpty)
+        .background(name.isEmpty ? .gray : .blue)
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .buttonStyle(.borderedProminent)
     }
