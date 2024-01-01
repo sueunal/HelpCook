@@ -12,8 +12,8 @@ import SwiftSoup
 struct CookView: View {
     @State var cookLevel: String
     @State var levelType: String
-    @ObservedObject var viewModel = CookViewModel()
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @State var cookModel = CookViewModel()
     
     let rows = [GridItem(),GridItem()]
     var body: some View {
@@ -25,9 +25,6 @@ struct CookView: View {
                         LazyVGrid(columns: rows){
                             cookListView()
                         }
-                        .onAppear{
-                            viewModel.getRequestData()
-                        }
                     }
                 }
             }
@@ -38,7 +35,7 @@ struct CookView: View {
     }
     @ViewBuilder
     func cookListView()-> some View{
-        ForEach(viewModel.cookData, id: \.self){ item in
+        ForEach(cookModel.cookData, id: \.self){ item in
             LazyVStack(alignment: .center){
                 AsyncImage(url: URL(string: item.cookImage)){ myimage in
                     myimage.resizable()
@@ -66,7 +63,7 @@ struct CookView: View {
         } label: {
             HStack {
                 Image(systemName: "arrow.left")
-                    .foregroundStyle(.green)
+                    .foregroundStyle(.black)
                     .aspectRatio(contentMode: .fit)
             }
         }

@@ -4,150 +4,107 @@
 //
 //  Created by sueun kim on 10/25/23.
 //
-
 import SwiftUI
-import Foundation
-
-struct Profile{
-    var name: String
-    var userImage: UIImage?
-    var message: String
-    var nickname: String
-}
+import PhotosUI
 
 struct ProfileView: View {
-    @State private var showingImagePicker = false
-    @State var pickedImage: Image
-    @ObservedObject var imageViewModel: ImageViewModel
-    @State private var profile = Profile(name: "김수은", userImage: UIImage(systemName: "person"), message:"", nickname: "수하")
-    @State var ProfileImage: Image = Image(systemName: "person")
-    @State var isSaved: Bool = false
-    @State var isClick: Bool = false
-    @State var deleteImage: Bool = false
+    @State private var selectedItem: PhotosPickerItem? = nil
+    @State private var selectedImageData: Data? = nil
+    @Binding var user: UserModel
+    @State var onSheet: Bool = false
+    @ObservedObject var imageViewModel = ImageViewModel()
+    
+    let profileImages : Image = Image(systemName: "person.circle.fill")
+    
     var body: some View {
-        ZStack{
+        NavigationStack{
             VStack{
-                photoSelectView()
-                Text(profile.nickname)
-                    .font(.title)
-                resetPhotoButton()
-                List {
-                    TextField("input", text: $profile.message)
-                }.listStyle(.inset)
-                Spacer()
-                Button{
-                    if let image = imageViewModel.pickedImage{
-                        profile.userImage = image
-                        isSaved.toggle()
+                HStack(spacing: 20){
+                    PhotosPicker(
+                        selection: $selectedItem,
+                        matching: .images
+                    ){
+                        if let profileImage = imageViewModel.profileImage{
+                            profileImage
+                                .resizable()
+                                .frame(width: 150, height: 150)
+                                .clipShape(Circle())
+                                .aspectRatio(contentMode: .fill)
+                        } else {
+                            ProgressView()
+                        }
                     }
-                }label: {
-                    Text("Save")
-                        .padding()
-                        .foregroundStyle(.white)
-                        .bold()
-                        .frame(maxWidth: 250)
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .foregroundColor(.pink)
-                        )
+                    .padding()
+                    InfoView()
                 }
-                .alert(isPresented: $isSaved, content: {
-                    Alert(title: Text("저장되었습니다."))
-                })
-                Spacer()
-            }
-            .onAppear{
-                if let image = imageViewModel.pickedImage{
-                    ProfileImage = Image(uiImage: image)
+                .onChange(of: selectedItem) { newItem in
+                    Task {
+                        if let data = try? await newItem?.loadTransferable(type: Data.self) {
+                            selectedImageData = data
+                            imageViewModel.StorageManger(data: data)
+                        }
+                    }
                 }
             }
-        }
-        
-    }
-    @ViewBuilder
-    func profileListView()-> some View{
-        HStack(alignment:.center){
-            Label("Your Favorite", systemImage: "heart.fill")
-                .padding()
-                .frame(maxWidth:.infinity)
-                .background(
-                    Rectangle()
-                        .stroke()
-                        .shadow(radius: 5)
-                        .foregroundStyle(
-                            LinearGradient(colors: [.red,.blue,.green], startPoint: .leading, endPoint: .trailing)
-                        )
-                )
-                .padding()
-        }
-    }
-    @ViewBuilder
-    func resetPhotoButton()-> some View{
-        Button{
-            isClick.toggle()
-            if deleteImage{
-                imageViewModel.pickedImage = UIImage(systemName: "person")
-                if let image = imageViewModel.pickedImage{
-                    ProfileImage = Image(uiImage: image)
-                }
-            }
-        }label: {
-            Image(systemName: "trash")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 20, height: 30)
-                .foregroundStyle(.black)
-        }.alert(isPresented: $isClick, content: {
-            Alert(
-                title: Text("정말로 지우시겠습니까?"),
-                primaryButton: .default(
-                    Text("취소"),
-                    action: .some({
-                        deleteImage = false
+            .navigationTitle("프로필")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar{
+                ToolbarItem {
+                    Button{
+                        onSheet = true
+                    }label: {
+                        Image(systemName: "gear")
+                    }
+                    .sheet(isPresented: $onSheet, content: {
+                        SettingsView(user: $user, confirm: $onSheet)
                     })
-                ),
-                secondaryButton: .destructive(
-                    Text("지우기"),
-                    action: .some({
-                        deleteImage = true
-                    })
-                )
-            )
-        })
+                }
+            }
+            Spacer()
+        }
     }
     @ViewBuilder
     func photoSelectView()-> some View{
-        VStack{
-            Button{
-                self.showingImagePicker.toggle()
-                guard let myImage = profile.userImage else{
-                    return
-                }
-                ProfileImage = Image(uiImage: myImage)
-            }label: {
-                Circle()
-                    .stroke( Gradient(colors: [.red,.blue,.green]) )
-                    .background(
-                        ProfileImage
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(maxWidth: 200, maxHeight: 200)
-                            .frame(minWidth: 100,minHeight: 100)
-                            .cornerRadius(100)
+        if let selectedImageData, let image = UIImage(data: selectedImageData){
+            Image(uiImage: image)
+                .resizable()
+                .frame(width: 150, height: 150)
+                .clipShape(Circle())
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 150, height: 150)
+                .background {
+                    Circle()
+                        .fill(
+                        LinearGradient(
+                            colors: [.yellow, .orange],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
                     )
-                    .frame(maxWidth: 200, maxHeight: 200)
-                    .frame(minWidth: 100,minHeight: 100)
-                    .padding()
-            }.sheet(isPresented: $showingImagePicker) {
-                ImagePicker(sourceType: .photoLibrary) { (image) in
-                    ProfileImage = Image(uiImage: image)
-                    imageViewModel.pickedImage = image
                 }
-            }
+        }else{
+            Image(systemName: "person.fill")
+                .resizable()
+                .frame(width: 80, height: 80)
+                .foregroundStyle(.black)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 150, height: 150)
+                .foregroundStyle(.black)
+                .background {
+                    Circle().fill(
+                        LinearGradient(
+                            colors: [.cyan, .white],
+                            startPoint: .center,
+                            endPoint: .zero
+                        )
+                    )
+                }
         }
     }
 }
+                   
 
 #Preview {
-    ProfileView(pickedImage: Image(systemName: "person.fill"), imageViewModel: ImageViewModel.init())
+    ProfileView(user: .constant(.dummy))
 }

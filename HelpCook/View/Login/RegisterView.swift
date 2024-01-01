@@ -16,16 +16,23 @@ struct RegisterView: View {
     @State var path = Path()
     var body: some View {
         NavigationStack{
-            VStack(spacing: 20){
+            VStack(spacing:1){
                 Spacer()
-                Text("Register")
-                    .font(.title)
+                Text("회원가입")
+                    .font(.system(size: 40))
                     .fontWeight(.heavy)
-                InputFieldView(inputString: $emailAddress, inputMessage: "이메일을 입력해주세요")
-                SecureInputView(secureMessage: "비밀번호를 입력해주세요", password: $passwd)
+                Spacer().frame(height: 100)
+                InputView(text: $emailAddress, placeholder:"Enter Email@address.com" , title: "Email")
+                InputView(text: $passwd, placeholder: "Enter Password", title: "Password", isSecureField: true)
                 registerButton()
+                    .alert(isPresented: $isError, content: {
+                        Alert(title:Text("Error") ,
+                              message: Text(authViewModel.errorMessage))
+                    })
                 Spacer()
-            }.navigationDestination(isPresented: $isRegistered){
+            }
+            .padding(.horizontal)
+            .navigationDestination(isPresented: $isRegistered){
                 loginView()
             }
         }
@@ -37,7 +44,7 @@ struct RegisterView: View {
             if authViewModel.isRegistered{
                 isRegistered.toggle()
             }else{
-                isError.toggle()
+                isError = true
             }
         }label: {
             Text("회원가입")
@@ -51,9 +58,7 @@ struct RegisterView: View {
                         .foregroundStyle(.black)
                         .frame(maxWidth: 200)
                 )
-        }.alert(isPresented: $isError, content: {
-            Alert(title: Text(authViewModel.errorMessage))
-        })
+        }
     }
 }
 

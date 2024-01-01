@@ -8,29 +8,34 @@
 import SwiftUI
 
 struct MainTabView: View {
+    @ObservedObject var viewModel = AuthViewModel()
+    
+    @State var showMainTabView: Bool = false
+    @Binding var user : UserModel
     var body: some View {
-        ZStack{
-            Color("BackgroundColor").ignoresSafeArea()
-            VStack{
-                TabView {
-                    HomeView()
-                        .tabItem {
-                            Label("Home", systemImage: "house.fill")
-                        }
-                    ChatView()
-                        .tabItem {
-                            Label("Chat", systemImage: "message")
-                        }
-                    ProfileView(pickedImage: Image(""), imageViewModel: ImageViewModel.init())
-                        .tabItem {
-                            Label("Profile", systemImage: "person.circle")
-                        }
+        NavigationStack(root: {
+            ZStack{
+                Color.black.ignoresSafeArea()
+                VStack{
+                    TabView {
+                        HomeView()
+                            .tabItem {
+                                Label("Home", systemImage: "house.fill")
+                            }
+                        ChatView(user: $user)
+                            .tabItem {
+                                Label("Chat", systemImage: "message")
+                            }
+                        ProfileView(user: $user)
+                            .tabItem {
+                                Label("Profile", systemImage: "person.circle")
+                            }
+                    }
                 }
-            }.navigationBarBackButtonHidden(true)
-        }
+            }
+        })
     }
 }
-
 #Preview {
-    MainTabView()
+    MainTabView(user: .constant(.dummy))
 }
