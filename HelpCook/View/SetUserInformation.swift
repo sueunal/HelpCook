@@ -26,29 +26,17 @@ struct SetUserInformation: View {
                 Spacer()
                     .frame(height: 200)
             }
-<<<<<<< HEAD
-            //            .navigationDestination(isPresented: $next) {
-            //                MainTabView()
-            //                    .navigationBarBackButtonHidden(true)
-            //                    .environmentObject(userViewModel)
-            //
-=======
 //            .navigationDestination(isPresented: $next) {
 //                MainTabView()
 //                    .navigationBarBackButtonHidden(true)
 //                    .environmentObject(userViewModel)
 //            }
->>>>>>> 6e1c2d99a5b632994b1f42859194f03bae613fba
         }
     }
     @ViewBuilder
     func NextButton()-> some View{
         Button{
-<<<<<<< HEAD
             userViewModel.insertData(parameter: ["name": name, "job":"developer", "image": "name"])
-=======
-            userViewModel.insertData(parameter: ["name": "sueun","job":"developer", "image": "asdfasdfasdfasdfasdfasdfa"])
->>>>>>> 6e1c2d99a5b632994b1f42859194f03bae613fba
         }label: {
             Text("다음")
                 .foregroundStyle(.white)
