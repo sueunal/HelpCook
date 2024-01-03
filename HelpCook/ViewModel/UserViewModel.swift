@@ -9,9 +9,52 @@ import SwiftUI
 
 class UserViewModel: ObservableObject{
     @Published var items : UserModel = .dummy
+    @Published var myImage: Image? = nil
     let prefixURL = "http://localhost"
     init(){
         fetchPost()
+    }
+    func convertData(){
+        let uiImage = UIImage(systemName: "person.fill")
+        
+        // 이미지를 Data로 변환합니다.
+        guard let imageData = uiImage?.jpegData(compressionQuality: 1.0) else {
+            print("Failed to convert image to Data")
+            return
+        }
+        guard let url  = URL(string: "\(prefixURL)/image") else{
+           return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        // 이미지 데이터를 Base64로 인코딩하여 JSON에 담습니다.
+        let base64String = imageData.base64EncodedString()
+        let json: [String: Any] = ["imageBase64": base64String]
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: json, options: [])
+            request.httpBody = jsonData
+        } catch {
+            print("Error creating JSON data: \(error)")
+            return
+        }
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error: \(error)")
+                return
+            }
+            if let data = data{
+                if let jsonString = String(data: data, encoding: .utf8) {
+                    print("Response data: \(jsonString)")
+                }
+            }
+            if let httpResponse = response as? HTTPURLResponse {
+                print("Status code: \(httpResponse.statusCode)")
+            }
+        }
+        task.resume()
+        return 
     }
     func insertData(parameter: [String: Any]) {
         guard let url = URL(string: "\(prefixURL)/create") else{

@@ -12,6 +12,7 @@ struct SetUserInformation: View {
     @State private var selectedItem: PhotosPickerItem? = nil
     @State private var selectedImageData: Data? = nil
     @State private var next: Bool = false
+    @State private var tempString: String = ""
     @State var name: String = ""
     @ObservedObject var userViewModel = UserViewModel()
     @ObservedObject var authViewModel = AuthViewModel()
@@ -36,7 +37,7 @@ struct SetUserInformation: View {
     @ViewBuilder
     func NextButton()-> some View{
         Button{
-            userViewModel.insertData(parameter: ["name": name, "job":"developer", "image": "name"])
+            userViewModel.insertData(parameter: ["name": name, "job":"developer", "image": ""])
         }label: {
             Text("다음")
                 .foregroundStyle(.white)
@@ -54,10 +55,10 @@ struct SetUserInformation: View {
                 selection: $selectedItem,
                 matching: .images
             ){
-                if let myImage = imageViewModel.profileImage {
-                    myImage
+                if let myImage = selectedImageData{
+                    Image(uiImage: UIImage(data: myImage)!)
                         .resizable()
-                        .frame(width: 150, height: 150)
+                        .frame(width: 200, height: 200)
                         .foregroundStyle(.black)
                         .clipShape(Circle())
                         .aspectRatio(contentMode: .fill)
@@ -76,7 +77,8 @@ struct SetUserInformation: View {
                 Task {
                     if let data = try? await newItem?.loadTransferable(type: Data.self) {
                         selectedImageData = data
-                        imageViewModel.StorageManger(data: data)
+                        userViewModel.convertData()
+//                        imageViewModel.StorageManger(data: data)
                     }
                 }
             }
