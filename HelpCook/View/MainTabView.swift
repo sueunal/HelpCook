@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @ObservedObject var viewModel = AuthViewModel()
     @State var showMainTabView: Bool = false
     var body: some View {
         NavigationStack(root: {

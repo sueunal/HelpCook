@@ -10,8 +10,10 @@ import PhotosUI
 struct ProfileView: View {
     @State private var selectedItem: PhotosPickerItem? = nil
     @State private var selectedImageData: Data? = nil
-    @State var onSheet: Bool = false
+    @State private var isClick: Bool = false
+    @State private var onSheet: Bool = false
     @StateObject var imageViewModel = ImageViewModel()
+    @EnvironmentObject var authViewModel: AuthViewModel
     
     let profileImages : Image = Image(systemName: "person.circle.fill")
     
@@ -62,6 +64,13 @@ struct ProfileView: View {
                     })
                 }
             }
+            goLoginButton()
+                .fullScreenCover(isPresented: $isClick, content: {
+                    RegisterView()
+                })
+//                .sheet(isPresented: $isClick, content: {
+//                    RegisterView()
+//                })
             Spacer()
         }
     }
@@ -102,6 +111,21 @@ struct ProfileView: View {
                         )
                     )
                 }
+        }
+    }
+    @ViewBuilder
+    func goLoginButton()-> some View{
+        Button{
+            isClick.toggle()
+        }label: {
+            Text("회원가입 또는 로그인하기")
+                .padding()
+                .foregroundStyle(.black)
+                .fontWeight(.heavy)
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke()
+                )
         }
     }
 }

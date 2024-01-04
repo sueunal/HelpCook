@@ -21,7 +21,7 @@ struct HelpCookApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView{
-                SetUserInformation()
+                MainTabView()
             }
         }
     }
