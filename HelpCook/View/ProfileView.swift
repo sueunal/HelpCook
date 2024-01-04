@@ -10,9 +10,8 @@ import PhotosUI
 struct ProfileView: View {
     @State private var selectedItem: PhotosPickerItem? = nil
     @State private var selectedImageData: Data? = nil
-    @Binding var user: UserModel
     @State var onSheet: Bool = false
-    @ObservedObject var imageViewModel = ImageViewModel()
+    @StateObject var imageViewModel = ImageViewModel()
     
     let profileImages : Image = Image(systemName: "person.circle.fill")
     
@@ -36,6 +35,9 @@ struct ProfileView: View {
                     }
                     .padding()
                     InfoView()
+                        .onAppear{
+                            imageViewModel.downloadImage()
+                        }
                 }
                 .onChange(of: selectedItem) { newItem in
                     Task {
@@ -56,7 +58,7 @@ struct ProfileView: View {
                         Image(systemName: "gear")
                     }
                     .sheet(isPresented: $onSheet, content: {
-                        SettingsView(user: $user, confirm: $onSheet)
+                        SettingsView()
                     })
                 }
             }
@@ -106,5 +108,5 @@ struct ProfileView: View {
                    
 
 #Preview {
-    ProfileView(user: .constant(.dummy))
+    ProfileView()
 }

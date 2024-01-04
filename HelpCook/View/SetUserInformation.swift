@@ -27,17 +27,23 @@ struct SetUserInformation: View {
                 Spacer()
                     .frame(height: 200)
             }
-//            .navigationDestination(isPresented: $next) {
-//                MainTabView()
-//                    .navigationBarBackButtonHidden(true)
-//                    .environmentObject(userViewModel)
-//            }
+            .navigationDestination(isPresented: $next) {
+                MainTabView()
+                    .navigationBarBackButtonHidden(true)
+                    .environmentObject(authViewModel)
+            }
         }
     }
     @ViewBuilder
     func NextButton()-> some View{
         Button{
-            userViewModel.insertData(parameter: ["name": name, "job":"developer", "image": ""])
+            if let image = selectedImageData{
+                userViewModel.insertData(parameter: ["name": name, "job":"developer", "image": ""])
+                next.toggle()
+                imageViewModel.uploadImage(image: UIImage(data: image)!) { url in
+                    
+                }
+            }
         }label: {
             Text("다음")
                 .foregroundStyle(.white)
@@ -77,8 +83,6 @@ struct SetUserInformation: View {
                 Task {
                     if let data = try? await newItem?.loadTransferable(type: Data.self) {
                         selectedImageData = data
-                        userViewModel.convertData()
-//                        imageViewModel.StorageManger(data: data)
                     }
                 }
             }

@@ -9,9 +9,7 @@ import SwiftUI
 
 struct MainTabView: View {
     @ObservedObject var viewModel = AuthViewModel()
-    
     @State var showMainTabView: Bool = false
-    @Binding var user : UserModel
     var body: some View {
         NavigationStack(root: {
             ZStack{
@@ -22,11 +20,11 @@ struct MainTabView: View {
                             .tabItem {
                                 Label("Home", systemImage: "house.fill")
                             }
-                        ChatView(user: $user)
+                        ChatView()
                             .tabItem {
                                 Label("Chat", systemImage: "message")
                             }
-                        ProfileView(user: $user)
+                        ProfileView()
                             .tabItem {
                                 Label("Profile", systemImage: "person.circle")
                             }
@@ -37,5 +35,5 @@ struct MainTabView: View {
     }
 }
 #Preview {
-    MainTabView(user: .constant(.dummy))
+    MainTabView()
 }

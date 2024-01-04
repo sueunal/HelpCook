@@ -23,7 +23,6 @@ struct ChatView: View {
     
     @State var inputMessage: String = ""
     @State var isEmty: Bool = false
-    @Binding var user: UserModel
     let contentMessage: String = "hello my name is"
     var message = Message()
     var body: some View {
@@ -77,5 +76,5 @@ struct ChatView: View {
 }
 
 #Preview {
-    ChatView(user: .constant(.dummy))
+    ChatView()
 }
