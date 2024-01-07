@@ -14,6 +14,7 @@ struct RegisterView: View {
     @State var isError: Bool = false
     @State var isRegistered: Bool = false
     @State var path = Path()
+    @Binding var isClick: Bool
     var body: some View {
         NavigationStack{
             VStack(spacing:1){
@@ -34,6 +35,20 @@ struct RegisterView: View {
             .padding(.horizontal)
             .navigationDestination(isPresented: $isRegistered){
                 loginView()
+                    .navigationBarBackButtonHidden(true)
+            }
+            .toolbar{
+                ToolbarItem {
+                    Button{
+                        isClick.toggle()
+                    }label: {
+                        Image(systemName: "multiply")
+                            .resizable()
+                            .frame(width: 20,height: 20)
+                            .foregroundStyle(.black)
+                            .padding()
+                    }
+                }
             }
         }
     }
@@ -42,7 +57,7 @@ struct RegisterView: View {
         Button{
             authViewModel.registerUser(email: emailAddress, password: passwd)
             if authViewModel.isRegistered{
-                isRegistered.toggle()
+                isRegistered = true
             }else{
                 isError = true
             }
@@ -63,5 +78,5 @@ struct RegisterView: View {
 }
 
 #Preview {
-    RegisterView()
+    RegisterView( isClick: .constant(false))
 }

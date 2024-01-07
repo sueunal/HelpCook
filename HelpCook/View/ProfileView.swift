@@ -12,66 +12,80 @@ struct ProfileView: View {
     @State private var selectedImageData: Data? = nil
     @State private var isClick: Bool = false
     @State private var onSheet: Bool = false
+    @State private var isLogged: Bool = true
     @StateObject var imageViewModel = ImageViewModel()
     @EnvironmentObject var authViewModel: AuthViewModel
     
     let profileImages : Image = Image(systemName: "person.circle.fill")
     
     var body: some View {
-        NavigationStack{
-            VStack{
-                HStack(spacing: 20){
-                    PhotosPicker(
-                        selection: $selectedItem,
-                        matching: .images
-                    ){
-                        if let profileImage = imageViewModel.profileImage{
-                            profileImage
-                                .resizable()
-                                .frame(width: 150, height: 150)
-                                .clipShape(Circle())
-                                .aspectRatio(contentMode: .fill)
-                        } else {
-                            ProgressView()
+        ZStack{
+            NavigationStack{
+                if isLogged{
+                    VStack{
+                        HStack(spacing: 20){
+                            PhotosPicker(
+                                selection: $selectedItem,
+                                matching: .images
+                            ){
+                                if let profileImage = imageViewModel.profileImage{
+                                    profileImage
+                                        .resizable()
+                                        .frame(width: 150, height: 150)
+                                        .clipShape(Circle())
+                                        .aspectRatio(contentMode: .fill)
+                                } else {
+                                    Image(systemName: "person.circle.fill")
+                                        .resizable()
+                                        .frame(width: 150, height: 150)
+                                        .clipShape(Circle())
+                                        .foregroundStyle(
+                                            LinearGradient(colors: [Color.black,Color.gray], startPoint: .topLeading, endPoint: .bottomTrailing)
+                                        )
+                                        .aspectRatio(contentMode: .fill)
+                                }
+                            }
+                            .padding()
+                            InfoView()
+                                .task{
+                                    imageViewModel.downloadImage()
+                                }
+                        }
+                        .onChange(of: selectedItem) { newItem in
+                            Task {
+                                if let data = try? await newItem?.loadTransferable(type: Data.self) {
+                                    selectedImageData = data
+                                    imageViewModel.StorageManger(data: data)
+                                }
+                            }
                         }
                     }
-                    .padding()
-                    InfoView()
-                        .onAppear{
-                            imageViewModel.downloadImage()
+                    .navigationTitle("프로필")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar{
+                        ToolbarItem {
+                            Button{
+                                onSheet = true
+                            }label: {
+                                Image(systemName: "gear")
+                            }
+                            .sheet(isPresented: $onSheet, content: {
+                                SettingsView()
+                            })
                         }
+                    }
+                    .blur(radius: 10)
+                    Spacer()
+                        .frame(height: 150)
+                    goLoginButton()
+                        .fullScreenCover(isPresented: $isClick, content: {
+                            RegisterView(isClick: $isClick)
+                        })
+                    Spacer()
                 }
-                .onChange(of: selectedItem) { newItem in
-                    Task {
-                        if let data = try? await newItem?.loadTransferable(type: Data.self) {
-                            selectedImageData = data
-                            imageViewModel.StorageManger(data: data)
-                        }
-                    }
+                else{
                 }
             }
-            .navigationTitle("프로필")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar{
-                ToolbarItem {
-                    Button{
-                        onSheet = true
-                    }label: {
-                        Image(systemName: "gear")
-                    }
-                    .sheet(isPresented: $onSheet, content: {
-                        SettingsView()
-                    })
-                }
-            }
-            goLoginButton()
-                .fullScreenCover(isPresented: $isClick, content: {
-                    RegisterView()
-                })
-//                .sheet(isPresented: $isClick, content: {
-//                    RegisterView()
-//                })
-            Spacer()
         }
     }
     @ViewBuilder
@@ -98,7 +112,7 @@ struct ProfileView: View {
                 .resizable()
                 .frame(width: 80, height: 80)
                 .foregroundStyle(.black)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .clipShape(RoundedRectangle(cornerRadius: 5))
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 150, height: 150)
                 .foregroundStyle(.black)
@@ -125,6 +139,7 @@ struct ProfileView: View {
                 .background(
                     RoundedRectangle(cornerRadius: 10)
                         .stroke()
+                        .foregroundStyle(.black)
                 )
         }
     }

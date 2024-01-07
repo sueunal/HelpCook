@@ -51,7 +51,8 @@ struct loginView: View {
                         .foregroundStyle(.black)
                 )
         }
-        .onChange(of: authViewModel.loginStatus){ _ in
+        .onChange(of: authViewModel.loginStatus){ status in
+            print(status.description)
             showMainTabView.toggle()
         }
     }
